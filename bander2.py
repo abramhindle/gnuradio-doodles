@@ -2,7 +2,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Bander: Shift Bands around
-# Generated: Sun Nov 22 23:13:20 2015
+# Generated: Sun Nov 22 23:13:03 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -16,7 +16,6 @@ if __name__ == '__main__':
             print "Warning: failed to XInitThreads()"
 
 from PyQt4 import Qt
-from gnuradio import analog
 from gnuradio import audio
 from gnuradio import blocks
 from gnuradio import eng_notation
@@ -29,7 +28,7 @@ from optparse import OptionParser
 import sys
 
 
-class bander(gr.top_block, Qt.QWidget):
+class bander2(gr.top_block, Qt.QWidget):
 
     def __init__(self):
         gr.top_block.__init__(self, "Bander: Shift Bands around")
@@ -51,7 +50,7 @@ class bander(gr.top_block, Qt.QWidget):
         self.top_grid_layout = Qt.QGridLayout()
         self.top_layout.addLayout(self.top_grid_layout)
 
-        self.settings = Qt.QSettings("GNU Radio", "bander")
+        self.settings = Qt.QSettings("GNU Radio", "bander2")
         self.restoreGeometry(self.settings.value("geometry").toByteArray())
 
         ##################################################
@@ -83,12 +82,6 @@ class bander(gr.top_block, Qt.QWidget):
         self._xlatecenter1_range = Range(-12000, 12000, 10, 0, 200)
         self._xlatecenter1_win = RangeWidget(self._xlatecenter1_range, self.set_xlatecenter1, "xlatecenter1", "counter_slider", float)
         self.top_layout.addWidget(self._xlatecenter1_win)
-        self._decayrate_range = Range(0, 2, 0.01, 0.01, 200)
-        self._decayrate_win = RangeWidget(self._decayrate_range, self.set_decayrate, "Decay Rate", "counter_slider", float)
-        self.top_layout.addWidget(self._decayrate_win)
-        self._atkrate_range = Range(0, 2, 0.01, 0.1, 200)
-        self._atkrate_win = RangeWidget(self._atkrate_range, self.set_atkrate, "Attack Rate", "counter_slider", float)
-        self.top_layout.addWidget(self._atkrate_win)
         self._transition_range = Range(0, 8000, 10, 100, 200)
         self._transition_win = RangeWidget(self._transition_range, self.set_transition, "Transition Band", "counter_slider", float)
         self.top_layout.addWidget(self._transition_win)
@@ -99,6 +92,9 @@ class bander(gr.top_block, Qt.QWidget):
         self.freq_xlating_fir_filter_xxx_0_0_0 = filter.freq_xlating_fir_filter_fcc(1, (xlate), xlatecenter3, samp_rate)
         self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_fcc(1, (xlate), xlatecenter2, samp_rate)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_fcc(1, (xlate), xlatecenter1, samp_rate)
+        self._decayrate_range = Range(0, 2, 0.01, 0.01, 200)
+        self._decayrate_win = RangeWidget(self._decayrate_range, self.set_decayrate, "Decay Rate", "counter_slider", float)
+        self.top_layout.addWidget(self._decayrate_win)
         self.blocks_complex_to_mag_0_0_1 = blocks.complex_to_mag(1)
         self.blocks_complex_to_mag_0_0_0 = blocks.complex_to_mag(1)
         self.blocks_complex_to_mag_0_0 = blocks.complex_to_mag(1)
@@ -108,22 +104,13 @@ class bander(gr.top_block, Qt.QWidget):
         self.audio_sink_0_0_0 = audio.sink(samp_rate, "Bander:3", True)
         self.audio_sink_0_0 = audio.sink(samp_rate, "Bander:2", True)
         self.audio_sink_0 = audio.sink(samp_rate, "Bander:1", True)
-        self.analog_agc2_xx_0_0_1 = analog.agc2_cc(atkrate, decayrate, 1.0, 1.0)
-        self.analog_agc2_xx_0_0_1.set_max_gain(65536)
-        self.analog_agc2_xx_0_0_0 = analog.agc2_cc(atkrate, decayrate, 1.0, 1.0)
-        self.analog_agc2_xx_0_0_0.set_max_gain(65536)
-        self.analog_agc2_xx_0_0 = analog.agc2_cc(atkrate, decayrate, 1.0, 1.0)
-        self.analog_agc2_xx_0_0.set_max_gain(65536)
-        self.analog_agc2_xx_0 = analog.agc2_cc(atkrate, decayrate, 1.0, 1.0)
-        self.analog_agc2_xx_0.set_max_gain(65536)
+        self._atkrate_range = Range(0, 2, 0.01, 0.1, 200)
+        self._atkrate_win = RangeWidget(self._atkrate_range, self.set_atkrate, "Attack Rate", "counter_slider", float)
+        self.top_layout.addWidget(self._atkrate_win)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_agc2_xx_0, 0), (self.blocks_complex_to_mag_0, 0))    
-        self.connect((self.analog_agc2_xx_0_0, 0), (self.blocks_complex_to_mag_0_0, 0))    
-        self.connect((self.analog_agc2_xx_0_0_0, 0), (self.blocks_complex_to_mag_0_0_0, 0))    
-        self.connect((self.analog_agc2_xx_0_0_1, 0), (self.blocks_complex_to_mag_0_0_1, 0))    
         self.connect((self.audio_source_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
         self.connect((self.audio_source_0, 0), (self.freq_xlating_fir_filter_xxx_0_0, 0))    
         self.connect((self.audio_source_0, 0), (self.freq_xlating_fir_filter_xxx_0_0_0, 0))    
@@ -132,13 +119,13 @@ class bander(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_complex_to_mag_0_0, 0), (self.audio_sink_0_0, 0))    
         self.connect((self.blocks_complex_to_mag_0_0_0, 0), (self.audio_sink_0_0_0, 0))    
         self.connect((self.blocks_complex_to_mag_0_0_1, 0), (self.audio_sink_0_0_1, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.analog_agc2_xx_0, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.analog_agc2_xx_0_0, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_0_0_0, 0), (self.analog_agc2_xx_0_0_0, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_0_0_1, 0), (self.analog_agc2_xx_0_0_1, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.blocks_complex_to_mag_0, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.blocks_complex_to_mag_0_0, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_0_0_0, 0), (self.blocks_complex_to_mag_0_0_0, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_0_0_1, 0), (self.blocks_complex_to_mag_0_0_1, 0))    
 
     def closeEvent(self, event):
-        self.settings = Qt.QSettings("GNU Radio", "bander")
+        self.settings = Qt.QSettings("GNU Radio", "bander2")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
 
@@ -206,20 +193,12 @@ class bander(gr.top_block, Qt.QWidget):
 
     def set_decayrate(self, decayrate):
         self.decayrate = decayrate
-        self.analog_agc2_xx_0.set_decay_rate(self.decayrate)
-        self.analog_agc2_xx_0_0.set_decay_rate(self.decayrate)
-        self.analog_agc2_xx_0_0_0.set_decay_rate(self.decayrate)
-        self.analog_agc2_xx_0_0_1.set_decay_rate(self.decayrate)
 
     def get_atkrate(self):
         return self.atkrate
 
     def set_atkrate(self, atkrate):
         self.atkrate = atkrate
-        self.analog_agc2_xx_0.set_attack_rate(self.atkrate)
-        self.analog_agc2_xx_0_0.set_attack_rate(self.atkrate)
-        self.analog_agc2_xx_0_0_0.set_attack_rate(self.atkrate)
-        self.analog_agc2_xx_0_0_1.set_attack_rate(self.atkrate)
 
 
 if __name__ == '__main__':
@@ -229,7 +208,7 @@ if __name__ == '__main__':
     if StrictVersion(Qt.qVersion()) >= StrictVersion("4.5.0"):
         Qt.QApplication.setGraphicsSystem(gr.prefs().get_string('qtgui','style','raster'))
     qapp = Qt.QApplication(sys.argv)
-    tb = bander()
+    tb = bander2()
     tb.start()
     tb.show()
 
