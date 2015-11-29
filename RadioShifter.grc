@@ -710,7 +710,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(248, 491)</value>
+      <value>(200, 491)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1054,6 +1054,183 @@
     <param>
       <key>notebook</key>
       <value>notebook_1,1</value>
+    </param>
+    <param>
+      <key>num_steps</key>
+      <value>1000</value>
+    </param>
+    <param>
+      <key>style</key>
+      <value>wx.SL_HORIZONTAL</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_slider</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>converver</key>
+      <value>float_converter</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(176, 763)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>grid_pos</key>
+      <value>1,0,1,5</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>xlatecenter_2</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>center22</value>
+    </param>
+    <param>
+      <key>max</key>
+      <value>1e6</value>
+    </param>
+    <param>
+      <key>min</key>
+      <value>-1e6</value>
+    </param>
+    <param>
+      <key>notebook</key>
+      <value>notebook_1,2</value>
+    </param>
+    <param>
+      <key>num_steps</key>
+      <value>1000</value>
+    </param>
+    <param>
+      <key>style</key>
+      <value>wx.SL_HORIZONTAL</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_slider</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>converver</key>
+      <value>float_converter</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(328, 763)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>grid_pos</key>
+      <value>1,0,1,5</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>xlatecenter_3</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>center23</value>
+    </param>
+    <param>
+      <key>max</key>
+      <value>1e6</value>
+    </param>
+    <param>
+      <key>min</key>
+      <value>-1e6</value>
+    </param>
+    <param>
+      <key>notebook</key>
+      <value>notebook_1,3</value>
+    </param>
+    <param>
+      <key>num_steps</key>
+      <value>1000</value>
+    </param>
+    <param>
+      <key>style</key>
+      <value>wx.SL_HORIZONTAL</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_slider</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>converver</key>
+      <value>float_converter</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(472, 763)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>grid_pos</key>
+      <value>1,0,1,5</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>xlatecenter_4</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>center24</value>
+    </param>
+    <param>
+      <key>max</key>
+      <value>1e6</value>
+    </param>
+    <param>
+      <key>min</key>
+      <value>-1e6</value>
+    </param>
+    <param>
+      <key>notebook</key>
+      <value>notebook_1,4</value>
     </param>
     <param>
       <key>num_steps</key>

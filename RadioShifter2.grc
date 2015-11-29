@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>bander3</value>
+      <value>RadioShifter2</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -70,7 +70,7 @@
     </param>
     <param>
       <key>title</key>
-      <value>Bander: Shift Bands around</value>
+      <value>Bander: Shift Bands around Radio</value>
     </param>
   </block>
   <block>
@@ -1025,7 +1025,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(32, 387)</value>
+      <value>(8, 387)</value>
     </param>
     <param>
       <key>gui_hint</key>
