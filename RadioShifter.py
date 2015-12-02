@@ -3,7 +3,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM radio FFT example
 # Author: David Haworth, Abram Hindle
-# Generated: Tue Dec  1 21:04:05 2015
+# Generated: Tue Dec  1 21:10:45 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -70,10 +70,10 @@ class RadioShifter(grc_wxgui.top_block_gui):
         self.bphi_2 = bphi_2 = 2800
         self.bphi_1 = bphi_1 = 2800
         self.audio_interp = audio_interp = 4
-        self.amp_4 = amp_4 = 1
-        self.amp_3 = amp_3 = 1
-        self.amp_2 = amp_2 = 1
-        self.amp_1 = amp_1 = 1
+        self.amp_4 = amp_4 = 0.0
+        self.amp_3 = amp_3 = 0.0
+        self.amp_2 = amp_2 = 0.0
+        self.amp_1 = amp_1 = 0.0
         self.RF_Gain = RF_Gain = 13
         self.CF = CF = 88.5e6
 
@@ -400,6 +400,98 @@ class RadioShifter(grc_wxgui.top_block_gui):
         	proportion=1,
         )
         self.notebook_1.GetPage(1).GridAdd(_bphi_1_sizer, 4, 0, 1, 5)
+        _amp_4_sizer = wx.BoxSizer(wx.VERTICAL)
+        self._amp_4_text_box = forms.text_box(
+        	parent=self.notebook_1.GetPage(4).GetWin(),
+        	sizer=_amp_4_sizer,
+        	value=self.amp_4,
+        	callback=self.set_amp_4,
+        	label="Amp",
+        	converter=forms.float_converter(),
+        	proportion=0,
+        )
+        self._amp_4_slider = forms.slider(
+        	parent=self.notebook_1.GetPage(4).GetWin(),
+        	sizer=_amp_4_sizer,
+        	value=self.amp_4,
+        	callback=self.set_amp_4,
+        	minimum=0,
+        	maximum=1,
+        	num_steps=100,
+        	style=wx.SL_HORIZONTAL,
+        	cast=float,
+        	proportion=1,
+        )
+        self.notebook_1.GetPage(4).GridAdd(_amp_4_sizer, 3, 5, 1, 5)
+        _amp_3_sizer = wx.BoxSizer(wx.VERTICAL)
+        self._amp_3_text_box = forms.text_box(
+        	parent=self.notebook_1.GetPage(3).GetWin(),
+        	sizer=_amp_3_sizer,
+        	value=self.amp_3,
+        	callback=self.set_amp_3,
+        	label="Amp",
+        	converter=forms.float_converter(),
+        	proportion=0,
+        )
+        self._amp_3_slider = forms.slider(
+        	parent=self.notebook_1.GetPage(3).GetWin(),
+        	sizer=_amp_3_sizer,
+        	value=self.amp_3,
+        	callback=self.set_amp_3,
+        	minimum=0,
+        	maximum=1,
+        	num_steps=100,
+        	style=wx.SL_HORIZONTAL,
+        	cast=float,
+        	proportion=1,
+        )
+        self.notebook_1.GetPage(3).GridAdd(_amp_3_sizer, 3, 5, 1, 5)
+        _amp_2_sizer = wx.BoxSizer(wx.VERTICAL)
+        self._amp_2_text_box = forms.text_box(
+        	parent=self.notebook_1.GetPage(2).GetWin(),
+        	sizer=_amp_2_sizer,
+        	value=self.amp_2,
+        	callback=self.set_amp_2,
+        	label="Amp",
+        	converter=forms.float_converter(),
+        	proportion=0,
+        )
+        self._amp_2_slider = forms.slider(
+        	parent=self.notebook_1.GetPage(2).GetWin(),
+        	sizer=_amp_2_sizer,
+        	value=self.amp_2,
+        	callback=self.set_amp_2,
+        	minimum=0,
+        	maximum=1,
+        	num_steps=100,
+        	style=wx.SL_HORIZONTAL,
+        	cast=float,
+        	proportion=1,
+        )
+        self.notebook_1.GetPage(2).GridAdd(_amp_2_sizer, 3, 5, 1, 5)
+        _amp_1_sizer = wx.BoxSizer(wx.VERTICAL)
+        self._amp_1_text_box = forms.text_box(
+        	parent=self.notebook_1.GetPage(1).GetWin(),
+        	sizer=_amp_1_sizer,
+        	value=self.amp_1,
+        	callback=self.set_amp_1,
+        	label="Amp",
+        	converter=forms.float_converter(),
+        	proportion=0,
+        )
+        self._amp_1_slider = forms.slider(
+        	parent=self.notebook_1.GetPage(1).GetWin(),
+        	sizer=_amp_1_sizer,
+        	value=self.amp_1,
+        	callback=self.set_amp_1,
+        	minimum=0,
+        	maximum=1,
+        	num_steps=100,
+        	style=wx.SL_HORIZONTAL,
+        	cast=float,
+        	proportion=1,
+        )
+        self.notebook_1.GetPage(1).GridAdd(_amp_1_sizer, 3, 5, 1, 5)
         _RF_Gain_sizer = wx.BoxSizer(wx.VERTICAL)
         self._RF_Gain_text_box = forms.text_box(
         	parent=self.notebook_1.GetPage(0).GetWin(),
@@ -883,6 +975,8 @@ class RadioShifter(grc_wxgui.top_block_gui):
 
     def set_amp_4(self, amp_4):
         self.amp_4 = amp_4
+        self._amp_4_slider.set_value(self.amp_4)
+        self._amp_4_text_box.set_value(self.amp_4)
         self.blocks_multiply_const_vxx_0_0_1.set_k((self.amp_4, ))
         self.blocks_multiply_const_vxx_0_0_1_0.set_k((self.amp_4, ))
 
@@ -891,6 +985,8 @@ class RadioShifter(grc_wxgui.top_block_gui):
 
     def set_amp_3(self, amp_3):
         self.amp_3 = amp_3
+        self._amp_3_slider.set_value(self.amp_3)
+        self._amp_3_text_box.set_value(self.amp_3)
         self.blocks_multiply_const_vxx_0_0_0.set_k((self.amp_3, ))
         self.blocks_multiply_const_vxx_0_0_0_0.set_k((self.amp_3, ))
 
@@ -899,6 +995,8 @@ class RadioShifter(grc_wxgui.top_block_gui):
 
     def set_amp_2(self, amp_2):
         self.amp_2 = amp_2
+        self._amp_2_slider.set_value(self.amp_2)
+        self._amp_2_text_box.set_value(self.amp_2)
         self.blocks_multiply_const_vxx_0_0.set_k((self.amp_2, ))
         self.blocks_multiply_const_vxx_0_0_2.set_k((self.amp_2, ))
 
@@ -907,6 +1005,8 @@ class RadioShifter(grc_wxgui.top_block_gui):
 
     def set_amp_1(self, amp_1):
         self.amp_1 = amp_1
+        self._amp_1_slider.set_value(self.amp_1)
+        self._amp_1_text_box.set_value(self.amp_1)
         self.blocks_multiply_const_vxx_0.set_k((self.amp_1, ))
         self.blocks_multiply_const_vxx_0_1.set_k((self.amp_1, ))
 

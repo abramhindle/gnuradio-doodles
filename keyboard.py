@@ -32,35 +32,35 @@ class RadioShiftSetter:
     def set_freq(self, i, freq):
         print "set_freq %s %s" % (i,freq)
         tb = self.tb
-	if i == 1:
+	if i == 0:
 	    tb.set_xlatecenter(freq)
-	elif i == 2:
+	elif i == 1:
 	    tb.set_xlatecenter_2(freq)
-	elif i == 3:
+	elif i == 2:
 	    tb.set_xlatecenter_3(freq)
-	elif i == 4:
+	elif i == 3:
 	    tb.set_xlatecenter_4(freq)
     def set_on(self, i):
-        return False
+        print "set_off %s" % i
         tb = self.tb
-	if i == 1:
+	if i == 0:
 	    tb.set_amp_1(1.0)
-	elif i == 2:
+	elif i == 1:
 	    tb.set_amp_2(1.0)
-	elif i == 3:
+	elif i == 2:
 	    tb.set_amp_3(1.0)
-	elif i == 4:
+	elif i == 3:
 	    tb.set_amp_4(1.0)
     def set_off(self, i):
-        return False
+        print "set_off %s" % i
         tb = self.tb
-	if i == 1:
+	if i == 0:
 	    tb.set_amp_1(0.0)
-	elif i == 2:
+	elif i == 1:
 	    tb.set_amp_2(0.0)
-	elif i == 3:
+	elif i == 2:
 	    tb.set_amp_3(0.0)
-	elif i == 4:
+	elif i == 3:
 	    tb.set_amp_4(0.0)
 
             
@@ -170,9 +170,9 @@ if __name__ == '__main__':
     minnote = 36
     maxnote = 84
     device = midiin.open_port(devindex)
-    setter = RadioShiftSetter(tb)    
+    setter = RadioShiftSetter(tb)
     collector = Collector(device, devindex, setter=setter)
     #collector.start()
-    tb.Start(True)
+    tb.Start(true)
     tb.Wait()
     collector.quit()

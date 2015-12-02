@@ -192,10 +192,18 @@
     </param>
   </block>
   <block>
-    <key>variable</key>
+    <key>variable_slider</key>
     <param>
       <key>comment</key>
       <value></value>
+    </param>
+    <param>
+      <key>converver</key>
+      <value>float_converter</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0.0</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -203,26 +211,58 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1328, 35)</value>
+      <value>(80, 1059)</value>
     </param>
     <param>
       <key>_rotation</key>
       <value>0</value>
+    </param>
+    <param>
+      <key>grid_pos</key>
+      <value>3,5,1,5</value>
     </param>
     <param>
       <key>id</key>
       <value>amp_1</value>
     </param>
     <param>
-      <key>value</key>
+      <key>label</key>
+      <value>Amp</value>
+    </param>
+    <param>
+      <key>max</key>
       <value>1</value>
+    </param>
+    <param>
+      <key>min</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>notebook</key>
+      <value>notebook_1,1</value>
+    </param>
+    <param>
+      <key>num_steps</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>style</key>
+      <value>wx.SL_HORIZONTAL</value>
     </param>
   </block>
   <block>
-    <key>variable</key>
+    <key>variable_slider</key>
     <param>
       <key>comment</key>
       <value></value>
+    </param>
+    <param>
+      <key>converver</key>
+      <value>float_converter</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0.0</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -230,26 +270,58 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1400, 35)</value>
+      <value>(240, 1083)</value>
     </param>
     <param>
       <key>_rotation</key>
       <value>0</value>
+    </param>
+    <param>
+      <key>grid_pos</key>
+      <value>3,5,1,5</value>
     </param>
     <param>
       <key>id</key>
       <value>amp_2</value>
     </param>
     <param>
-      <key>value</key>
+      <key>label</key>
+      <value>Amp</value>
+    </param>
+    <param>
+      <key>max</key>
       <value>1</value>
+    </param>
+    <param>
+      <key>min</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>notebook</key>
+      <value>notebook_1,2</value>
+    </param>
+    <param>
+      <key>num_steps</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>style</key>
+      <value>wx.SL_HORIZONTAL</value>
     </param>
   </block>
   <block>
-    <key>variable</key>
+    <key>variable_slider</key>
     <param>
       <key>comment</key>
       <value></value>
+    </param>
+    <param>
+      <key>converver</key>
+      <value>float_converter</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0.0</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -257,26 +329,58 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1472, 35)</value>
+      <value>(48, 1251)</value>
     </param>
     <param>
       <key>_rotation</key>
       <value>0</value>
+    </param>
+    <param>
+      <key>grid_pos</key>
+      <value>3,5,1,5</value>
     </param>
     <param>
       <key>id</key>
       <value>amp_3</value>
     </param>
     <param>
-      <key>value</key>
+      <key>label</key>
+      <value>Amp</value>
+    </param>
+    <param>
+      <key>max</key>
       <value>1</value>
+    </param>
+    <param>
+      <key>min</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>notebook</key>
+      <value>notebook_1,3</value>
+    </param>
+    <param>
+      <key>num_steps</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>style</key>
+      <value>wx.SL_HORIZONTAL</value>
     </param>
   </block>
   <block>
-    <key>variable</key>
+    <key>variable_slider</key>
     <param>
       <key>comment</key>
       <value></value>
+    </param>
+    <param>
+      <key>converver</key>
+      <value>float_converter</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0.0</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -284,19 +388,43 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1544, 35)</value>
+      <value>(208, 1267)</value>
     </param>
     <param>
       <key>_rotation</key>
       <value>0</value>
     </param>
     <param>
+      <key>grid_pos</key>
+      <value>3,5,1,5</value>
+    </param>
+    <param>
       <key>id</key>
       <value>amp_4</value>
     </param>
     <param>
-      <key>value</key>
+      <key>label</key>
+      <value>Amp</value>
+    </param>
+    <param>
+      <key>max</key>
       <value>1</value>
+    </param>
+    <param>
+      <key>min</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>notebook</key>
+      <value>notebook_1,4</value>
+    </param>
+    <param>
+      <key>num_steps</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>style</key>
+      <value>wx.SL_HORIZONTAL</value>
     </param>
   </block>
   <block>
