@@ -19,8 +19,8 @@ import RadioShifter
 VELOCITY = 2
 TYPE = 0
 INSTR = 1
-MIDION = 144
-MIDIOFF = 128
+NOTEON = MIDION = 144
+NOTEOFF = MIDIOFF = 128
 CTRL = 176
 PITCH = 224
 # modulation is ctrl-176, 1
@@ -40,6 +40,7 @@ class RadioShiftSetter:
 	elif i == 4:
 	    tb.set_xlatecenter_4(freq)
     def set_on(self, i):
+        return False
         tb = self.tb
 	if i == 1:
 	    tb.set_amp_1(1.0)
@@ -50,6 +51,7 @@ class RadioShiftSetter:
 	elif i == 4:
 	    tb.set_amp_4(1.0)
     def set_off(self, i):
+        return False
         tb = self.tb
 	if i == 1:
 	    tb.set_amp_1(0.0)
@@ -80,12 +82,22 @@ class Collector(threading.Thread):
         self.bw = bw
         
     def new_note(self, note_code):
-        i = self.freqs.index(False)
-        self.freqs[i] = True
-        return (note_code, i)
+        try:
+            for i in range(0,len(self.freqs)):
+                self.freqs[i] = False
+            for note in self.notes:
+                self.freqs[note[1]] = True
+            i = self.freqs.index(False)
+            self.freqs[i] = True
+            print self.freqs
+            print self.notes
+            return (note_code, i)
+        except ValueError:
+            print self
+            print self.freqs
         
     def shift_notes(self):
-        if len(self.notes) >= self.max - 1:
+        if len(self.notes) >= self.max:
             note = self.notes[0]
             self.notes = self.notes[1:]
             self.send_off(note)
@@ -96,10 +108,26 @@ class Collector(threading.Thread):
         self.notes.append(note)
         self.send_on(note)
 
-    def noteoff(self,note_code):
-        if note in self.notes:
+    def find_note(self,note_code):
+        for x in self.notes:
+            if x[0] == note_code:
+                return x
+        return None
+
+    def remove_note(self, note_code):
+        note = self.find_note(note_code)
+        if not note is None:
             self.notes.remove(note)
-        self.send_off(note)
+        else:
+            print "Note %s not found" % note_code
+    
+    def noteoff(self,note_code):
+        note = self.find_note( note_code )
+        if not note:
+            print "Warning %s not found!" % note_code
+            return
+        self.send_off( note )
+        self.notes.remove( note )
 
     def send_on(self,note):        
         (note_code, i) = note        
@@ -120,8 +148,12 @@ class Collector(threading.Thread):
                 return
             msg = self.device.get_message()
             if msg:
-                print msg
+                print msg                    
                 # process message
+                if msg[0][TYPE] == NOTEON:
+                    self.noteon(msg[0][INSTR])
+                elif msg[0][TYPE] == NOTEOFF:
+                    self.noteoff(msg[0][INSTR])
 
 if __name__ == '__main__':
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
