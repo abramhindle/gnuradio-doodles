@@ -30,6 +30,7 @@ class RadioShiftSetter:
         self.tb = tb
 
     def set_freq(self, i, freq):
+        print "set_freq %s %s" % (i,freq)
         tb = self.tb
 	if i == 1:
 	    tb.set_xlatecenter(freq)
@@ -80,6 +81,9 @@ class Collector(threading.Thread):
         self.freqs = self.max * [False]
         self.setter = setter
         self.bw = bw
+        def callback(message,ts):
+            self.handle_message(message)
+        self.device.set_callback(callback)
         
     def new_note(self, note_code):
         try:
@@ -140,20 +144,17 @@ class Collector(threading.Thread):
     def send_off(self,note):
         (note_code, i) = note        
         self.setter.set_off(i)
+
+    def handle_message(self, msg):
+        print msg                    
+        # process message
+        if msg[TYPE] == NOTEON:
+            self.noteon(msg[INSTR])
+        elif msg[TYPE] == NOTEOFF:
+            self.noteoff(msg[INSTR])
         
     def run(self):
-        #self.device.ignore_types(True, False, True)
-        while True:
-            if self.quit:
-                return
-            msg = self.device.get_message()
-            if msg:
-                print msg                    
-                # process message
-                if msg[0][TYPE] == NOTEON:
-                    self.noteon(msg[0][INSTR])
-                elif msg[0][TYPE] == NOTEOFF:
-                    self.noteoff(msg[0][INSTR])
+        raise "Not working"
 
 if __name__ == '__main__':
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
@@ -169,7 +170,7 @@ if __name__ == '__main__':
     device = midiin.open_port(devindex)
     setter = RadioShiftSetter(tb)    
     collector = Collector(device, devindex, setter=setter)
-    collector.start()
+    #collector.start()
     tb.Start(True)
     tb.Wait()
     collector.quit()
