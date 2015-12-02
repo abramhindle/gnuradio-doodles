@@ -81,10 +81,11 @@ class Collector(threading.Thread):
         self.freqs = self.max * [False]
         self.setter = setter
         self.bw = bw
-        def callback(message,ts):
-            self.handle_message(message)
-        self.device.set_callback(callback)
-        
+        self.device.set_callback(self.callback)
+
+    def callback(self,message,ts):
+        self.handle_message(message)
+    
     def new_note(self, note_code):
         try:
             for i in range(0,len(self.freqs)):
@@ -107,6 +108,7 @@ class Collector(threading.Thread):
             self.send_off(note)
         
     def noteon(self, note_code):
+        print "Noteon %s" % note_code
         self.shift_notes()
         note = self.new_note(note_code)
         self.notes.append(note)
@@ -146,8 +148,8 @@ class Collector(threading.Thread):
         self.setter.set_off(i)
 
     def handle_message(self, msg):
-        print msg                    
-        # process message
+        msg = msg[0]
+        print msg
         if msg[TYPE] == NOTEON:
             self.noteon(msg[INSTR])
         elif msg[TYPE] == NOTEOFF:

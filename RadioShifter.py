@@ -3,7 +3,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM radio FFT example
 # Author: David Haworth, Abram Hindle
-# Generated: Sat Nov 28 23:08:33 2015
+# Generated: Tue Dec  1 21:04:05 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -70,6 +70,10 @@ class RadioShifter(grc_wxgui.top_block_gui):
         self.bphi_2 = bphi_2 = 2800
         self.bphi_1 = bphi_1 = 2800
         self.audio_interp = audio_interp = 4
+        self.amp_4 = amp_4 = 1
+        self.amp_3 = amp_3 = 1
+        self.amp_2 = amp_2 = 1
+        self.amp_1 = amp_1 = 1
         self.RF_Gain = RF_Gain = 13
         self.CF = CF = 88.5e6
 
@@ -565,6 +569,14 @@ class RadioShifter(grc_wxgui.top_block_gui):
         self.freq_xlating_fir_filter_xxx_0_0_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_4, variable_sample_rate_0)
         self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_2, variable_sample_rate_0)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter, variable_sample_rate_0)
+        self.blocks_multiply_const_vxx_0_1 = blocks.multiply_const_vff((amp_1, ))
+        self.blocks_multiply_const_vxx_0_0_2 = blocks.multiply_const_vff((amp_2, ))
+        self.blocks_multiply_const_vxx_0_0_1_0 = blocks.multiply_const_vff((amp_4, ))
+        self.blocks_multiply_const_vxx_0_0_1 = blocks.multiply_const_vff((amp_4, ))
+        self.blocks_multiply_const_vxx_0_0_0_0 = blocks.multiply_const_vff((amp_3, ))
+        self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_vff((amp_3, ))
+        self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((amp_2, ))
+        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((amp_1, ))
         self.blocks_complex_to_mag_0_1 = blocks.complex_to_mag(1)
         self.blocks_complex_to_mag_0_0_0 = blocks.complex_to_mag(1)
         self.blocks_complex_to_mag_0_0 = blocks.complex_to_mag(1)
@@ -646,10 +658,18 @@ class RadioShifter(grc_wxgui.top_block_gui):
         self.connect((self.blocks_add_xx_1_0, 0), (self.audio_sink_1_0_0, 0))    
         self.connect((self.blocks_add_xx_1_1, 0), (self.audio_sink_1_0_1, 0))    
         self.connect((self.blocks_add_xx_1_1_0, 0), (self.audio_sink_1_0_0_0, 0))    
-        self.connect((self.blocks_complex_to_mag_0, 0), (self.blocks_add_xx_1_0, 0))    
-        self.connect((self.blocks_complex_to_mag_0_0, 0), (self.blocks_add_xx_1_0, 1))    
-        self.connect((self.blocks_complex_to_mag_0_0_0, 0), (self.blocks_add_xx_1_1_0, 1))    
-        self.connect((self.blocks_complex_to_mag_0_1, 0), (self.blocks_add_xx_1_1_0, 0))    
+        self.connect((self.blocks_complex_to_mag_0, 0), (self.blocks_multiply_const_vxx_0_1, 0))    
+        self.connect((self.blocks_complex_to_mag_0_0, 0), (self.blocks_multiply_const_vxx_0_0_2, 0))    
+        self.connect((self.blocks_complex_to_mag_0_0_0, 0), (self.blocks_multiply_const_vxx_0_0_1_0, 0))    
+        self.connect((self.blocks_complex_to_mag_0_1, 0), (self.blocks_multiply_const_vxx_0_0_0_0, 0))    
+        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_add_xx_1, 0))    
+        self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.blocks_add_xx_1, 1))    
+        self.connect((self.blocks_multiply_const_vxx_0_0_0, 0), (self.blocks_add_xx_1_1, 0))    
+        self.connect((self.blocks_multiply_const_vxx_0_0_0_0, 0), (self.blocks_add_xx_1_1_0, 0))    
+        self.connect((self.blocks_multiply_const_vxx_0_0_1, 0), (self.blocks_add_xx_1_1, 1))    
+        self.connect((self.blocks_multiply_const_vxx_0_0_1_0, 0), (self.blocks_add_xx_1_1_0, 1))    
+        self.connect((self.blocks_multiply_const_vxx_0_0_2, 0), (self.blocks_add_xx_1_0, 1))    
+        self.connect((self.blocks_multiply_const_vxx_0_1, 0), (self.blocks_add_xx_1_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.analog_nbfm_rx_0_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.band_pass_filter_0_0_0_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.analog_nbfm_rx_0_0_0, 0))    
@@ -658,14 +678,14 @@ class RadioShifter(grc_wxgui.top_block_gui):
         self.connect((self.freq_xlating_fir_filter_xxx_0_0_0, 0), (self.band_pass_filter_0_0_0_0_0_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_1, 0), (self.analog_nbfm_rx_0_0_1, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_1, 0), (self.band_pass_filter_0_0_0_0_1, 0))    
-        self.connect((self.rational_resampler_xxx_1_0, 0), (self.blocks_add_xx_1, 0))    
+        self.connect((self.rational_resampler_xxx_1_0, 0), (self.blocks_multiply_const_vxx_0, 0))    
         self.connect((self.rational_resampler_xxx_1_0_0, 0), (self.blocks_complex_to_mag_0, 0))    
         self.connect((self.rational_resampler_xxx_1_0_0_0, 0), (self.blocks_complex_to_mag_0_0, 0))    
         self.connect((self.rational_resampler_xxx_1_0_0_0_0, 0), (self.blocks_complex_to_mag_0_0_0, 0))    
         self.connect((self.rational_resampler_xxx_1_0_0_1, 0), (self.blocks_complex_to_mag_0_1, 0))    
-        self.connect((self.rational_resampler_xxx_1_0_1, 0), (self.blocks_add_xx_1, 1))    
-        self.connect((self.rational_resampler_xxx_1_0_1_0, 0), (self.blocks_add_xx_1_1, 1))    
-        self.connect((self.rational_resampler_xxx_1_0_2, 0), (self.blocks_add_xx_1_1, 0))    
+        self.connect((self.rational_resampler_xxx_1_0_1, 0), (self.blocks_multiply_const_vxx_0_0, 0))    
+        self.connect((self.rational_resampler_xxx_1_0_1_0, 0), (self.blocks_multiply_const_vxx_0_0_1, 0))    
+        self.connect((self.rational_resampler_xxx_1_0_2, 0), (self.blocks_multiply_const_vxx_0_0_0, 0))    
 
 
     def get_variable_sample_rate_0(self):
@@ -857,6 +877,38 @@ class RadioShifter(grc_wxgui.top_block_gui):
 
     def set_audio_interp(self, audio_interp):
         self.audio_interp = audio_interp
+
+    def get_amp_4(self):
+        return self.amp_4
+
+    def set_amp_4(self, amp_4):
+        self.amp_4 = amp_4
+        self.blocks_multiply_const_vxx_0_0_1.set_k((self.amp_4, ))
+        self.blocks_multiply_const_vxx_0_0_1_0.set_k((self.amp_4, ))
+
+    def get_amp_3(self):
+        return self.amp_3
+
+    def set_amp_3(self, amp_3):
+        self.amp_3 = amp_3
+        self.blocks_multiply_const_vxx_0_0_0.set_k((self.amp_3, ))
+        self.blocks_multiply_const_vxx_0_0_0_0.set_k((self.amp_3, ))
+
+    def get_amp_2(self):
+        return self.amp_2
+
+    def set_amp_2(self, amp_2):
+        self.amp_2 = amp_2
+        self.blocks_multiply_const_vxx_0_0.set_k((self.amp_2, ))
+        self.blocks_multiply_const_vxx_0_0_2.set_k((self.amp_2, ))
+
+    def get_amp_1(self):
+        return self.amp_1
+
+    def set_amp_1(self, amp_1):
+        self.amp_1 = amp_1
+        self.blocks_multiply_const_vxx_0.set_k((self.amp_1, ))
+        self.blocks_multiply_const_vxx_0_1.set_k((self.amp_1, ))
 
     def get_RF_Gain(self):
         return self.RF_Gain
