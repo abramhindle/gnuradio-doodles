@@ -173,6 +173,6 @@ if __name__ == '__main__':
     setter = RadioShiftSetter(tb)
     collector = Collector(device, devindex, setter=setter)
     #collector.start()
-    tb.Start(true)
+    tb.Start(True)
     tb.Wait()
     collector.quit()
