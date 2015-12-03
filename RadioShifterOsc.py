@@ -103,30 +103,21 @@ if __name__ == '__main__':
     except ServerError, err:
         print str(err)
         sys.exit()
-    print "NOUTPUT %s" % tb.max_noutput_items()
     buffersize = 256
     items = 64
-    tb.audio_sink_1_0_1.set_max_output_buffer(buffersize)
-    tb.audio_sink_1_0_0_0.set_max_output_buffer(buffersize)
-    tb.audio_sink_1_0_0.set_max_output_buffer(buffersize)
-    tb.audio_sink_1_0.set_max_output_buffer(buffersize)
-    tb.audio_sink_1_0_1.set_max_noutput_items(buffersize)
-    tb.audio_sink_1_0_0_0.set_max_noutput_items(buffersize)
-    tb.audio_sink_1_0_0.set_max_noutput_items(buffersize)
-    tb.audio_sink_1_0.set_max_noutput_items(buffersize)
+    tb.audio_sink_1.set_max_output_buffer(buffersize)
+    tb.audio_sink_2.set_max_output_buffer(buffersize)
+    tb.audio_sink_3.set_max_output_buffer(buffersize)
+    tb.audio_sink_4.set_max_output_buffer(buffersize)
+    tb.audio_sink_1.set_max_noutput_items(buffersize)
+    tb.audio_sink_2.set_max_noutput_items(buffersize)
+    tb.audio_sink_3.set_max_noutput_items(buffersize)
+    tb.audio_sink_4.set_max_noutput_items(buffersize)
 
-    
-    # tb.Start(True)
-    #tb.start()
-    #tb.Start(True)
-    #tb.Wait()
-    #tb.start()
-    #tb.start(512)
     tb.set_CF(125.6e6)
     tb.start(5)
 
     while True:
-        #time.sleep(0.01)
         server.recv(10)
 
     

@@ -3,7 +3,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM radio FFT example
 # Author: David Haworth, Abram Hindle
-# Generated: Wed Dec  2 23:07:56 2015
+# Generated: Wed Dec  2 23:50:30 2015
 ##################################################
 
 from gnuradio import analog
@@ -134,10 +134,10 @@ class RadioShifterHeadless(gr.top_block):
         	1, samp_rate, bplow_2, bphi_2, bptrans, firdes.WIN_HAMMING, 6.76))
         self.band_pass_filter_0_0_0_0 = filter.fir_filter_ccf(4, firdes.band_pass(
         	1, samp_rate, bplow_1, bphi_1, bptrans, firdes.WIN_HAMMING, 6.76))
-        self.audio_sink_1_0_1 = audio.sink(48000, "Radio:NFM2", True)
-        self.audio_sink_1_0_0_0 = audio.sink(48000, "Radio:AM2", True)
-        self.audio_sink_1_0_0 = audio.sink(48000, "Radio:AM1", True)
-        self.audio_sink_1_0 = audio.sink(48000, "Radio:NFM1", True)
+        self.audio_sink_4 = audio.sink(48000, "Radio:AM2", True)
+        self.audio_sink_3 = audio.sink(48000, "Radio:NFM2", True)
+        self.audio_sink_2 = audio.sink(48000, "Radio:AM1", True)
+        self.audio_sink_1 = audio.sink(48000, "Radio:NFM1", True)
         self.analog_nbfm_rx_0_0_1 = analog.nbfm_rx(
         	audio_rate=50000,
         	quad_rate=int(variable_sample_rate_0/5),
@@ -191,10 +191,10 @@ class RadioShifterHeadless(gr.top_block):
         self.connect((self.band_pass_filter_0_0_0_0_0, 0), (self.rational_resampler_xxx_1_0_0_0, 0))    
         self.connect((self.band_pass_filter_0_0_0_0_0_0, 0), (self.rational_resampler_xxx_1_0_0_0_0, 0))    
         self.connect((self.band_pass_filter_0_0_0_0_1, 0), (self.rational_resampler_xxx_1_0_0_1, 0))    
-        self.connect((self.blocks_add_xx_1, 0), (self.audio_sink_1_0, 0))    
-        self.connect((self.blocks_add_xx_1_0, 0), (self.audio_sink_1_0_0, 0))    
-        self.connect((self.blocks_add_xx_1_1, 0), (self.audio_sink_1_0_1, 0))    
-        self.connect((self.blocks_add_xx_1_1_0, 0), (self.audio_sink_1_0_0_0, 0))    
+        self.connect((self.blocks_add_xx_1, 0), (self.audio_sink_1, 0))    
+        self.connect((self.blocks_add_xx_1_0, 0), (self.audio_sink_2, 0))    
+        self.connect((self.blocks_add_xx_1_1, 0), (self.audio_sink_3, 0))    
+        self.connect((self.blocks_add_xx_1_1_0, 0), (self.audio_sink_4, 0))    
         self.connect((self.blocks_complex_to_mag_0, 0), (self.blocks_multiply_const_vxx_0_1, 0))    
         self.connect((self.blocks_complex_to_mag_0_0, 0), (self.blocks_multiply_const_vxx_0_0_2, 0))    
         self.connect((self.blocks_complex_to_mag_0_0_0, 0), (self.blocks_multiply_const_vxx_0_0_1_0, 0))    
