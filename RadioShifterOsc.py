@@ -121,14 +121,14 @@ if __name__ == '__main__':
             obj.set_max_noutput_items(items)
                         
             #print "%s %s" % (attr,obj.__class__)
-    # tb.audio_sink_1_0_1.set_max_output_buffer(buffersize)
-    # tb.audio_sink_1_0_0_0.set_max_output_buffer(buffersize)
-    # tb.audio_sink_1_0_0.set_max_output_buffer(buffersize)
-    # tb.audio_sink_1_0.set_max_output_buffer(buffersize)
-    # tb.audio_sink_1_0_1.set_max_noutput_items(buffersize)
-    # tb.audio_sink_1_0_0_0.set_max_noutput_items(buffersize)
-    # tb.audio_sink_1_0_0.set_max_noutput_items(buffersize)
-    # tb.audio_sink_1_0.set_max_noutput_items(buffersize)
+    tb.audio_sink_1_0_1.set_max_output_buffer(buffersize)
+    tb.audio_sink_1_0_0_0.set_max_output_buffer(buffersize)
+    tb.audio_sink_1_0_0.set_max_output_buffer(buffersize)
+    tb.audio_sink_1_0.set_max_output_buffer(buffersize)
+    tb.audio_sink_1_0_1.set_max_noutput_items(buffersize)
+    tb.audio_sink_1_0_0_0.set_max_noutput_items(buffersize)
+    tb.audio_sink_1_0_0.set_max_noutput_items(buffersize)
+    tb.audio_sink_1_0.set_max_noutput_items(buffersize)
 
     
     # tb.Start(True)
