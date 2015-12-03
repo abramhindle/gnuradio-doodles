@@ -104,20 +104,31 @@ if __name__ == '__main__':
         print str(err)
         sys.exit()
     print "NOUTPUT %s" % tb.max_noutput_items()
-    print tb.max_output_buffer(0)
-    tb.set_max_noutput_items(128)
-    tb.set_max_output_buffer(128)
-    print tb.max_output_buffer(0)
+    buffersize = 256
+    items = 64
+    tb.set_max_noutput_items(items)
+    tb.set_max_output_buffer(items)
     print "NOUTPUT %s" % tb.max_noutput_items()
-    size = 256
-    tb.audio_sink_1_0_1.set_max_output_buffer(size)
-    tb.audio_sink_1_0_0_0.set_max_output_buffer(size)
-    tb.audio_sink_1_0_0.set_max_output_buffer(size)
-    tb.audio_sink_1_0.set_max_output_buffer(size)
-    tb.audio_sink_1_0_1.set_max_noutput_items(size)
-    tb.audio_sink_1_0_0_0.set_max_noutput_items(size)
-    tb.audio_sink_1_0_0.set_max_noutput_items(size)
-    tb.audio_sink_1_0.set_max_noutput_items(size)
+
+    # disgusting mess
+    attrs = dir(tb)
+    import gnuradio
+    for attr in attrs:
+        obj = getattr(tb, attr)
+
+        if isinstance(obj,gnuradio.blocks.blocks_swig2.complex_to_mag_sptr):
+            obj.set_max_output_buffer(buffersize)
+            obj.set_max_noutput_items(items)
+                        
+            #print "%s %s" % (attr,obj.__class__)
+    tb.audio_sink_1_0_1.set_max_output_buffer(buffersize)
+    tb.audio_sink_1_0_0_0.set_max_output_buffer(buffersize)
+    tb.audio_sink_1_0_0.set_max_output_buffer(buffersize)
+    tb.audio_sink_1_0.set_max_output_buffer(buffersize)
+    tb.audio_sink_1_0_1.set_max_noutput_items(buffersize)
+    tb.audio_sink_1_0_0_0.set_max_noutput_items(buffersize)
+    tb.audio_sink_1_0_0.set_max_noutput_items(buffersize)
+    tb.audio_sink_1_0.set_max_noutput_items(buffersize)
 
     
     # tb.Start(True)
@@ -127,10 +138,10 @@ if __name__ == '__main__':
     #tb.start()
     #tb.start(512)
     tb.set_CF(125.6e6)
-    tb.start(10)
+    tb.start(5)
 
     while True:
         #time.sleep(0.01)
-        server.recv(1)
+        server.recv(10)
 
     
