@@ -10,12 +10,12 @@ if __name__ == '__main__':
 
 from optparse import OptionParser
 from gnuradio.eng_option import eng_option
-import RadioShifter
+import RadioShifterHeadless
 from liblo import *
 tb = None
-class MyOscServer(ServerThread):
+class MyOscServer(Server):
     def __init__(self):
-        ServerThread.__init__(self, 1234)
+        Server.__init__(self, 1234)
 
     @make_method('/foo', 'ifs')
     def foo_callback(self, path, args):
@@ -93,17 +93,27 @@ class MyOscServer(ServerThread):
     def fallback(self, path, args):
         print "received unknown message '%s'" % path
 
-
+import time
 if __name__ == '__main__':
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     (options, args) = parser.parse_args()
-    tb = RadioShifter.RadioShifter()
+    tb = RadioShifterHeadless.RadioShifterHeadless()
     try:
         server = MyOscServer()
     except ServerError, err:
         print str(err)
-        sys.exit()
-    server.start()
-    tb.set_max_noutput_items(1000)
-    tb.Start(True)
-    tb.Wait()
+        sys.exit()    
+    #tb.set_max_noutput_items(1000)
+    # tb.Start(True)
+    #tb.start()
+    #tb.Start(True)
+    #tb.Wait()
+    #tb.start()
+    tb.start(512)
+    tb.set_CF(125.6e6)
+    tb.set_max_output_buffer(2048)
+    while True:
+        #time.sleep(0.01)
+        server.recv(10)
+
+    

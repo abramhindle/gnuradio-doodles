@@ -3,7 +3,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM radio FFT example
 # Author: David Haworth, Abram Hindle
-# Generated: Wed Dec  2 22:47:29 2015
+# Generated: Wed Dec  2 22:49:03 2015
 ##################################################
 
 from gnuradio import analog
@@ -19,7 +19,7 @@ import osmosdr
 import time
 
 
-class RadioShifter(gr.top_block):
+class RadioShifterHeadless(gr.top_block):
 
     def __init__(self):
         gr.top_block.__init__(self, "FM radio FFT example")
@@ -427,7 +427,7 @@ class RadioShifter(gr.top_block):
 if __name__ == '__main__':
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     (options, args) = parser.parse_args()
-    tb = RadioShifter()
+    tb = RadioShifterHeadless()
     tb.start()
     try:
         raw_input('Press Enter to quit: ')
