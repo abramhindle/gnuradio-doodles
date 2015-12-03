@@ -106,21 +106,6 @@ if __name__ == '__main__':
     print "NOUTPUT %s" % tb.max_noutput_items()
     buffersize = 256
     items = 64
-    tb.set_max_noutput_items(items)
-    tb.set_max_output_buffer(items)
-    print "NOUTPUT %s" % tb.max_noutput_items()
-
-    # disgusting mess
-    attrs = dir(tb)
-    import gnuradio
-    for attr in attrs:
-        obj = getattr(tb, attr)
-
-        if isinstance(obj,gnuradio.blocks.blocks_swig2.complex_to_mag_sptr):
-            obj.set_max_output_buffer(buffersize)
-            obj.set_max_noutput_items(items)
-                        
-            #print "%s %s" % (attr,obj.__class__)
     tb.audio_sink_1_0_1.set_max_output_buffer(buffersize)
     tb.audio_sink_1_0_0_0.set_max_output_buffer(buffersize)
     tb.audio_sink_1_0_0.set_max_output_buffer(buffersize)
