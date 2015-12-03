@@ -74,7 +74,21 @@ class MyOscServer(ServerThread):
             else:
                 print "Invalid index %s" % i
         return None
-
+    
+    @make_method('/amp', 'if')
+    def amp_callback(self, path, args):
+        i, f = args
+        print "set_amp %s" % i
+	if i == 1:
+	    tb.set_amp_1(f)
+	elif i == 2:
+	    tb.set_amp_2(f)
+	elif i == 3:
+	    tb.set_amp_3(f)
+	elif i == 4:
+	    tb.set_amp_4(f)
+        return None
+    
     @make_method(None, None)
     def fallback(self, path, args):
         print "received unknown message '%s'" % path
@@ -90,5 +104,6 @@ if __name__ == '__main__':
         print str(err)
         sys.exit()
     server.start()
+    tb.set_max_noutput_items(1000)
     tb.Start(True)
     tb.Wait()

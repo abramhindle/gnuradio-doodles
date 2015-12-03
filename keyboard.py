@@ -14,7 +14,6 @@ if __name__ == '__main__':
 
 from optparse import OptionParser
 from gnuradio.eng_option import eng_option
-import RadioShifter
 
 VELOCITY = 2
 TYPE = 0
@@ -62,6 +61,22 @@ class RadioShiftSetter:
 	    tb.set_amp_3(0.0)
 	elif i == 3:
 	    tb.set_amp_4(0.0)
+
+import liblo
+class OscSetter:
+    def __init__(self,port=1234):
+        self.target = liblo.Address(port)
+    def send_osc(self,path,*args):
+        liblo.send(self.target, path, *args)
+    def set_freq(self, i, freq):
+        print "set_freq %s %s" % (i,freq)
+        self.send_osc("/center",i+1,freq)
+    def set_on(self, i):
+        print "set_off %s" % i
+        self.send_osc("/amp",i+1,1.0)
+    def set_off(self, i):
+        print "set_off %s" % i
+        self.send_osc("/amp",i+1,0.0)
 
             
 
@@ -158,10 +173,29 @@ class Collector(threading.Thread):
     def run(self):
         raise "Not working"
 
+
+def liblomain():
+    midiin = rtmidi.MidiIn()
+    available_ports = midiin.get_ports()
+    devname = u'BEHRINGER UMC404 28:0'
+    devname = u'masterkey 49 32:0'
+    devindex = available_ports.index(devname)
+    minnote = 36
+    maxnote = 84
+    device = midiin.open_port(devindex)
+    setter = OscSetter()
+    collector = Collector(device, devindex, setter=setter)
+    print "Press Enter to end"
+    sys.stdin.readline()
+    collector.quit()
+
+    
 if __name__ == '__main__':
+    import RadioShifter
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     (options, args) = parser.parse_args()
     tb = RadioShifter.RadioShifter()
+    tb.set_max_noutput_items(1000)
     midiin = rtmidi.MidiIn()
     available_ports = midiin.get_ports()
     devname = u'BEHRINGER UMC404 28:0'
