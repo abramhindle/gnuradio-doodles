@@ -102,18 +102,35 @@ if __name__ == '__main__':
         server = MyOscServer()
     except ServerError, err:
         print str(err)
-        sys.exit()    
-    #tb.set_max_noutput_items(1000)
+        sys.exit()
+    print "NOUTPUT %s" % tb.max_noutput_items()
+    print tb.max_output_buffer(0)
+    tb.set_max_noutput_items(128)
+    tb.set_max_output_buffer(128)
+    print tb.max_output_buffer(0)
+    print "NOUTPUT %s" % tb.max_noutput_items()
+    size = 256
+    tb.audio_sink_1_0_1.set_max_output_buffer(size)
+    tb.audio_sink_1_0_0_0.set_max_output_buffer(size)
+    tb.audio_sink_1_0_0.set_max_output_buffer(size)
+    tb.audio_sink_1_0.set_max_output_buffer(size)
+    tb.audio_sink_1_0_1.set_max_noutput_items(size)
+    tb.audio_sink_1_0_0_0.set_max_noutput_items(size)
+    tb.audio_sink_1_0_0.set_max_noutput_items(size)
+    tb.audio_sink_1_0.set_max_noutput_items(size)
+
+    
     # tb.Start(True)
     #tb.start()
     #tb.Start(True)
     #tb.Wait()
     #tb.start()
-    tb.start(512)
+    #tb.start(512)
     tb.set_CF(125.6e6)
-    tb.set_max_output_buffer(2048)
+    tb.start(10)
+
     while True:
         #time.sleep(0.01)
-        server.recv(10)
+        server.recv(1)
 
     
