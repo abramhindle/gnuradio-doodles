@@ -77,6 +77,9 @@ class OscSetter:
     def set_off(self, i):
         print "set_off %s" % i
         self.send_osc("/amp",i+1,0.0)
+    def set_pscf(self, i, freq):
+        print "set_pscf %s %s" % (i,freq)
+        self.send_osc("/pscf",i+1,freq)
 
             
 
@@ -155,7 +158,10 @@ class Collector(threading.Thread):
         if self.setter:
             r = self.maxnote - self.minnote            
             freq = self.bw * (((note_code - self.minnote)/float(r)) - 0.5)
-            self.setter.set_freq(i, freq)
+            pscf = 10000.0 * (((note_code - self.minnote)/float(r)) - 0.5)
+            # self.setter.set_freq(i, freq)
+            self.setter.set_freq(i, 0)
+            self.setter.set_pscf(i, pscf)
             self.setter.set_on(i)
             
     def send_off(self,note):

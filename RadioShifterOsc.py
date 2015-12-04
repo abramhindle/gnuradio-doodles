@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
 from optparse import OptionParser
 from gnuradio.eng_option import eng_option
-import RadioShifterHeadless
+import RadioShifterPitchShiftHeadless
 from liblo import *
 tb = None
 class MyOscServer(Server):
@@ -88,6 +88,21 @@ class MyOscServer(Server):
 	elif i == 4:
 	    tb.set_amp_4(f)
         return None
+
+    @make_method('/pscf', 'if')
+    def pscf_callback(self, path, args):
+        i, f = args
+        print "set_pscf %s %s" % (i,f)
+	if i == 1:
+	    tb.set_pscf1(f)
+	elif i == 2:
+	    tb.set_pscf2(f)
+	elif i == 3:
+	    tb.set_pscf3(f)
+	elif i == 4:
+	    tb.set_pscf4(f)
+        return None
+
     
     @make_method(None, None)
     def fallback(self, path, args):
@@ -97,14 +112,14 @@ import time
 if __name__ == '__main__':
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     (options, args) = parser.parse_args()
-    tb = RadioShifterHeadless.RadioShifterHeadless()
+    tb = RadioShifterPitchShiftHeadless.RadioShifterPitchShiftHeadless()
     try:
         server = MyOscServer()
     except ServerError, err:
         print str(err)
         sys.exit()
-    buffersize = 256
-    items = 64
+    buffersize = 512
+    items = 128
     tb.audio_sink_1.set_max_output_buffer(buffersize)
     tb.audio_sink_2.set_max_output_buffer(buffersize)
     tb.audio_sink_3.set_max_output_buffer(buffersize)
@@ -115,7 +130,8 @@ if __name__ == '__main__':
     tb.audio_sink_4.set_max_noutput_items(buffersize)
 
     tb.set_CF(125.6e6)
-    tb.start(5)
+    tb.set_CF(88.5e6)
+    tb.start(32)
 
     while True:
         server.recv(10)
