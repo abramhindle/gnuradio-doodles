@@ -490,6 +490,33 @@
     </param>
     <param>
       <key>_coordinate</key>
+      <value>(832, 224)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>bpsr</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>200000</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
       <value>(280, 419)</value>
     </param>
     <param>
@@ -679,6 +706,60 @@
     </param>
     <param>
       <key>_coordinate</key>
+      <value>(1120, 227)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>rrd</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>500</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1040, 235)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>rri</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>441</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
       <value>(1056, 139)</value>
     </param>
     <param>
@@ -691,7 +772,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>48000</value>
+      <value>44100</value>
     </param>
   </block>
   <block>
@@ -2820,7 +2901,7 @@
     </param>
     <param>
       <key>samp_rate</key>
-      <value>samp_rate</value>
+      <value>bpsr</value>
     </param>
     <param>
       <key>width</key>
@@ -2899,7 +2980,7 @@
     </param>
     <param>
       <key>samp_rate</key>
-      <value>samp_rate</value>
+      <value>bpsr</value>
     </param>
     <param>
       <key>width</key>
@@ -2978,7 +3059,7 @@
     </param>
     <param>
       <key>samp_rate</key>
-      <value>samp_rate</value>
+      <value>bpsr</value>
     </param>
     <param>
       <key>width</key>
@@ -3021,7 +3102,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1192, 1083)</value>
+      <value>(1184, 1083)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3057,7 +3138,7 @@
     </param>
     <param>
       <key>samp_rate</key>
-      <value>samp_rate</value>
+      <value>bpsr</value>
     </param>
     <param>
       <key>width</key>
@@ -4312,7 +4393,7 @@
     </param>
     <param>
       <key>taps</key>
-      <value>xlate_filter2</value>
+      <value>1</value>
     </param>
     <param>
       <key>type</key>
@@ -4371,7 +4452,7 @@
     </param>
     <param>
       <key>taps</key>
-      <value>xlate_filter2</value>
+      <value>1</value>
     </param>
     <param>
       <key>type</key>
@@ -4430,7 +4511,7 @@
     </param>
     <param>
       <key>taps</key>
-      <value>xlate_filter2</value>
+      <value>1</value>
     </param>
     <param>
       <key>type</key>
@@ -4465,7 +4546,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1160, 1275)</value>
+      <value>(1168, 1307)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -4489,7 +4570,7 @@
     </param>
     <param>
       <key>taps</key>
-      <value>xlate_filter2</value>
+      <value>1</value>
     </param>
     <param>
       <key>type</key>
@@ -4548,7 +4629,7 @@
     </param>
     <param>
       <key>taps</key>
-      <value>xlate_filter2</value>
+      <value>1</value>
     </param>
     <param>
       <key>type</key>
@@ -4607,7 +4688,7 @@
     </param>
     <param>
       <key>taps</key>
-      <value>xlate_filter2</value>
+      <value>1</value>
     </param>
     <param>
       <key>type</key>
@@ -4666,7 +4747,7 @@
     </param>
     <param>
       <key>taps</key>
-      <value>xlate_filter2</value>
+      <value>1</value>
     </param>
     <param>
       <key>type</key>
@@ -4725,7 +4806,7 @@
     </param>
     <param>
       <key>taps</key>
-      <value>xlate_filter2</value>
+      <value>1</value>
     </param>
     <param>
       <key>type</key>
@@ -4748,7 +4829,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>1</value>
+      <value>rrd</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -4760,7 +4841,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1368, 995)</value>
+      <value>(1392, 995)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -4772,7 +4853,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>1</value>
+      <value>rri</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -4807,7 +4888,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>50</value>
+      <value>rrd</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -4831,7 +4912,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>48</value>
+      <value>rri</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -4866,7 +4947,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>50</value>
+      <value>rrd</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -4890,7 +4971,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>48</value>
+      <value>rri</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -4925,7 +5006,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>50</value>
+      <value>rrd</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -4949,7 +5030,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>48</value>
+      <value>rri</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -4984,7 +5065,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>50</value>
+      <value>rrd</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -5008,7 +5089,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>48</value>
+      <value>rri</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -5043,7 +5124,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>50</value>
+      <value>rrd</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -5055,7 +5136,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1376, 1115)</value>
+      <value>(1384, 1139)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5067,7 +5148,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>48</value>
+      <value>rri</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -5102,7 +5183,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>50</value>
+      <value>rrd</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -5126,7 +5207,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>48</value>
+      <value>rri</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -5161,7 +5242,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>50</value>
+      <value>rrd</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -5185,7 +5266,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>48</value>
+      <value>rri</value>
     </param>
     <param>
       <key>maxoutbuf</key>

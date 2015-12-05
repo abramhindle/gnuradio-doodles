@@ -3,7 +3,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM radio FFT example
 # Author: David Haworth, Abram Hindle
-# Generated: Thu Dec  3 23:24:48 2015
+# Generated: Fri Dec  4 19:49:25 2015
 ##################################################
 
 from gnuradio import analog
@@ -28,15 +28,17 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         # Variables
         ##################################################
         self.variable_sample_rate_0 = variable_sample_rate_0 = 1e6
-        self.samp_rate = samp_rate = 48000
+        self.samp_rate = samp_rate = 44100
         self.xlatecenter_4 = xlatecenter_4 = 0
         self.xlatecenter_3 = xlatecenter_3 = 0
         self.xlatecenter_2 = xlatecenter_2 = 0
         self.xlatecenter = xlatecenter = 0
-        self.xlate_filter2 = xlate_filter2 = firdes.low_pass(1, samp_rate, 10000, 2000, firdes.WIN_HAMMING, 6.76)
+        self.xlate_filter2 = xlate_filter2 = firdes.low_pass(1, samp_rate, 4000, 1000, firdes.WIN_HAMMING, 6.76)
         self.xlate_filter = xlate_filter = firdes.low_pass(1, variable_sample_rate_0, 125000, 25000, firdes.WIN_HAMMING, 6.76)
         self.variable_1 = variable_1 = 0
         self.transition = transition = 1e6
+        self.rri = rri = 441
+        self.rrd = rrd = 500
         self.quadrature = quadrature = 500000
         self.pscf4 = pscf4 = 0
         self.pscf3 = pscf3 = 0
@@ -44,6 +46,7 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         self.pscf1 = pscf1 = 0
         self.cutoff = cutoff = 1e5
         self.bptrans = bptrans = 100
+        self.bpsr = bpsr = 200000
         self.bplow_4 = bplow_4 = 100
         self.bplow_3 = bplow_3 = 100
         self.bplow_2 = bplow_2 = 100
@@ -64,61 +67,61 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         # Blocks
         ##################################################
         self.rational_resampler_xxx_1_0_1_0 = filter.rational_resampler_fff(
-                interpolation=48,
-                decimation=50,
+                interpolation=rri,
+                decimation=rrd,
                 taps=None,
                 fractional_bw=None,
         )
         self.rational_resampler_xxx_1_0_1 = filter.rational_resampler_fff(
-                interpolation=48,
-                decimation=50,
+                interpolation=rri,
+                decimation=rrd,
                 taps=None,
                 fractional_bw=None,
         )
         self.rational_resampler_xxx_1_0_0_1 = filter.rational_resampler_ccc(
-                interpolation=48,
-                decimation=50,
+                interpolation=rri,
+                decimation=rrd,
                 taps=None,
                 fractional_bw=None,
         )
         self.rational_resampler_xxx_1_0_0_0_0 = filter.rational_resampler_ccc(
-                interpolation=48,
-                decimation=50,
+                interpolation=rri,
+                decimation=rrd,
                 taps=None,
                 fractional_bw=None,
         )
         self.rational_resampler_xxx_1_0_0_0 = filter.rational_resampler_ccc(
-                interpolation=48,
-                decimation=50,
+                interpolation=rri,
+                decimation=rrd,
                 taps=None,
                 fractional_bw=None,
         )
         self.rational_resampler_xxx_1_0_0 = filter.rational_resampler_ccc(
-                interpolation=48,
-                decimation=50,
+                interpolation=rri,
+                decimation=rrd,
                 taps=None,
                 fractional_bw=None,
         )
         self.rational_resampler_xxx_1_0 = filter.rational_resampler_fff(
-                interpolation=48,
-                decimation=50,
+                interpolation=rri,
+                decimation=rrd,
                 taps=None,
                 fractional_bw=None,
         )
         self.rational_resampler_xxx_0 = filter.rational_resampler_fff(
-                interpolation=1,
-                decimation=1,
+                interpolation=rri,
+                decimation=rrd,
                 taps=None,
                 fractional_bw=None,
         )
-        self.freq_xlating_fir_filter_xxx_1_1_0_0 = filter.freq_xlating_fir_filter_ccc(1, (xlate_filter2), pscf4, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1_1_0 = filter.freq_xlating_fir_filter_ccc(1, (xlate_filter2), pscf3, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1_1 = filter.freq_xlating_fir_filter_ccc(1, (xlate_filter2), pscf2, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1_0_0_0_0 = filter.freq_xlating_fir_filter_fcc(1, (xlate_filter2), pscf4, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1_0_0_0 = filter.freq_xlating_fir_filter_fcc(1, (xlate_filter2), pscf3, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1_0_0 = filter.freq_xlating_fir_filter_fcc(1, (xlate_filter2), pscf2, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1_0 = filter.freq_xlating_fir_filter_fcc(1, (xlate_filter2), pscf1, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1 = filter.freq_xlating_fir_filter_ccc(1, (xlate_filter2), pscf1, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_1_0_0 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf4, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_1_0 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf3, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_1 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf2, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_0_0_0_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf4, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_0_0_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf3, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_0_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf2, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf1, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf1, samp_rate)
         self.freq_xlating_fir_filter_xxx_0_1 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_3, variable_sample_rate_0)
         self.freq_xlating_fir_filter_xxx_0_0_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_4, variable_sample_rate_0)
         self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_2, variable_sample_rate_0)
@@ -144,13 +147,13 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         self.blocks_add_xx_1_0 = blocks.add_vff(1)
         self.blocks_add_xx_1 = blocks.add_vff(1)
         self.band_pass_filter_0_0_0_0_1 = filter.fir_filter_ccf(4, firdes.band_pass(
-        	1, samp_rate, bplow_3, bphi_3, bptrans, firdes.WIN_HAMMING, 6.76))
+        	1, bpsr, bplow_3, bphi_3, bptrans, firdes.WIN_HAMMING, 6.76))
         self.band_pass_filter_0_0_0_0_0_0 = filter.fir_filter_ccf(4, firdes.band_pass(
-        	1, samp_rate, bplow_4, bphi_4, bptrans, firdes.WIN_HAMMING, 6.76))
+        	1, bpsr, bplow_4, bphi_4, bptrans, firdes.WIN_HAMMING, 6.76))
         self.band_pass_filter_0_0_0_0_0 = filter.fir_filter_ccf(4, firdes.band_pass(
-        	1, samp_rate, bplow_2, bphi_2, bptrans, firdes.WIN_HAMMING, 6.76))
+        	1, bpsr, bplow_2, bphi_2, bptrans, firdes.WIN_HAMMING, 6.76))
         self.band_pass_filter_0_0_0_0 = filter.fir_filter_ccf(4, firdes.band_pass(
-        	1, samp_rate, bplow_1, bphi_1, bptrans, firdes.WIN_HAMMING, 6.76))
+        	1, bpsr, bplow_1, bphi_1, bptrans, firdes.WIN_HAMMING, 6.76))
         self.audio_sink_4 = audio.sink(48000, "Radio:AM2", True)
         self.audio_sink_3 = audio.sink(48000, "Radio:NFM2", True)
         self.audio_sink_2 = audio.sink(48000, "Radio:AM1", True)
@@ -267,11 +270,7 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_xlate_filter2(firdes.low_pass(1, self.samp_rate, 10000, 2000, firdes.WIN_HAMMING, 6.76))
-        self.band_pass_filter_0_0_0_0.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_1, self.bphi_1, self.bptrans, firdes.WIN_HAMMING, 6.76))
-        self.band_pass_filter_0_0_0_0_0.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_2, self.bphi_2, self.bptrans, firdes.WIN_HAMMING, 6.76))
-        self.band_pass_filter_0_0_0_0_0_0.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_4, self.bphi_4, self.bptrans, firdes.WIN_HAMMING, 6.76))
-        self.band_pass_filter_0_0_0_0_1.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_3, self.bphi_3, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.set_xlate_filter2(firdes.low_pass(1, self.samp_rate, 4000, 1000, firdes.WIN_HAMMING, 6.76))
 
     def get_xlatecenter_4(self):
         return self.xlatecenter_4
@@ -306,14 +305,6 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
 
     def set_xlate_filter2(self, xlate_filter2):
         self.xlate_filter2 = xlate_filter2
-        self.freq_xlating_fir_filter_xxx_1.set_taps((self.xlate_filter2))
-        self.freq_xlating_fir_filter_xxx_1_0.set_taps((self.xlate_filter2))
-        self.freq_xlating_fir_filter_xxx_1_0_0.set_taps((self.xlate_filter2))
-        self.freq_xlating_fir_filter_xxx_1_0_0_0.set_taps((self.xlate_filter2))
-        self.freq_xlating_fir_filter_xxx_1_0_0_0_0.set_taps((self.xlate_filter2))
-        self.freq_xlating_fir_filter_xxx_1_1.set_taps((self.xlate_filter2))
-        self.freq_xlating_fir_filter_xxx_1_1_0.set_taps((self.xlate_filter2))
-        self.freq_xlating_fir_filter_xxx_1_1_0_0.set_taps((self.xlate_filter2))
 
     def get_xlate_filter(self):
         return self.xlate_filter
@@ -336,6 +327,18 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
 
     def set_transition(self, transition):
         self.transition = transition
+
+    def get_rri(self):
+        return self.rri
+
+    def set_rri(self, rri):
+        self.rri = rri
+
+    def get_rrd(self):
+        return self.rrd
+
+    def set_rrd(self, rrd):
+        self.rrd = rrd
 
     def get_quadrature(self):
         return self.quadrature
@@ -386,66 +389,76 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
 
     def set_bptrans(self, bptrans):
         self.bptrans = bptrans
-        self.band_pass_filter_0_0_0_0.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_1, self.bphi_1, self.bptrans, firdes.WIN_HAMMING, 6.76))
-        self.band_pass_filter_0_0_0_0_0.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_2, self.bphi_2, self.bptrans, firdes.WIN_HAMMING, 6.76))
-        self.band_pass_filter_0_0_0_0_0_0.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_4, self.bphi_4, self.bptrans, firdes.WIN_HAMMING, 6.76))
-        self.band_pass_filter_0_0_0_0_1.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_3, self.bphi_3, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_1, self.bphi_1, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0_0.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_2, self.bphi_2, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0_0_0.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_4, self.bphi_4, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0_1.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_3, self.bphi_3, self.bptrans, firdes.WIN_HAMMING, 6.76))
+
+    def get_bpsr(self):
+        return self.bpsr
+
+    def set_bpsr(self, bpsr):
+        self.bpsr = bpsr
+        self.band_pass_filter_0_0_0_0.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_1, self.bphi_1, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0_0.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_2, self.bphi_2, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0_0_0.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_4, self.bphi_4, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0_1.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_3, self.bphi_3, self.bptrans, firdes.WIN_HAMMING, 6.76))
 
     def get_bplow_4(self):
         return self.bplow_4
 
     def set_bplow_4(self, bplow_4):
         self.bplow_4 = bplow_4
-        self.band_pass_filter_0_0_0_0_0_0.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_4, self.bphi_4, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0_0_0.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_4, self.bphi_4, self.bptrans, firdes.WIN_HAMMING, 6.76))
 
     def get_bplow_3(self):
         return self.bplow_3
 
     def set_bplow_3(self, bplow_3):
         self.bplow_3 = bplow_3
-        self.band_pass_filter_0_0_0_0_1.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_3, self.bphi_3, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0_1.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_3, self.bphi_3, self.bptrans, firdes.WIN_HAMMING, 6.76))
 
     def get_bplow_2(self):
         return self.bplow_2
 
     def set_bplow_2(self, bplow_2):
         self.bplow_2 = bplow_2
-        self.band_pass_filter_0_0_0_0_0.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_2, self.bphi_2, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0_0.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_2, self.bphi_2, self.bptrans, firdes.WIN_HAMMING, 6.76))
 
     def get_bplow_1(self):
         return self.bplow_1
 
     def set_bplow_1(self, bplow_1):
         self.bplow_1 = bplow_1
-        self.band_pass_filter_0_0_0_0.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_1, self.bphi_1, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_1, self.bphi_1, self.bptrans, firdes.WIN_HAMMING, 6.76))
 
     def get_bphi_4(self):
         return self.bphi_4
 
     def set_bphi_4(self, bphi_4):
         self.bphi_4 = bphi_4
-        self.band_pass_filter_0_0_0_0_0_0.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_4, self.bphi_4, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0_0_0.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_4, self.bphi_4, self.bptrans, firdes.WIN_HAMMING, 6.76))
 
     def get_bphi_3(self):
         return self.bphi_3
 
     def set_bphi_3(self, bphi_3):
         self.bphi_3 = bphi_3
-        self.band_pass_filter_0_0_0_0_1.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_3, self.bphi_3, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0_1.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_3, self.bphi_3, self.bptrans, firdes.WIN_HAMMING, 6.76))
 
     def get_bphi_2(self):
         return self.bphi_2
 
     def set_bphi_2(self, bphi_2):
         self.bphi_2 = bphi_2
-        self.band_pass_filter_0_0_0_0_0.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_2, self.bphi_2, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0_0.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_2, self.bphi_2, self.bptrans, firdes.WIN_HAMMING, 6.76))
 
     def get_bphi_1(self):
         return self.bphi_1
 
     def set_bphi_1(self, bphi_1):
         self.bphi_1 = bphi_1
-        self.band_pass_filter_0_0_0_0.set_taps(firdes.band_pass(1, self.samp_rate, self.bplow_1, self.bphi_1, self.bptrans, firdes.WIN_HAMMING, 6.76))
+        self.band_pass_filter_0_0_0_0.set_taps(firdes.band_pass(1, self.bpsr, self.bplow_1, self.bphi_1, self.bptrans, firdes.WIN_HAMMING, 6.76))
 
     def get_audio_interp(self):
         return self.audio_interp

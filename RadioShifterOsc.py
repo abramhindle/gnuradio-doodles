@@ -78,7 +78,7 @@ class MyOscServer(Server):
     @make_method('/amp', 'if')
     def amp_callback(self, path, args):
         i, f = args
-        print "set_amp %s" % i
+        print "set_amp %s %s" % (i,f)
 	if i == 1:
 	    tb.set_amp_1(f)
 	elif i == 2:
@@ -118,22 +118,23 @@ if __name__ == '__main__':
     except ServerError, err:
         print str(err)
         sys.exit()
-    buffersize = 512
-    items = 128
+    buffersize = 1024
+    items = 256
+    tb.set_max_noutput_items(items)
     tb.audio_sink_1.set_max_output_buffer(buffersize)
     tb.audio_sink_2.set_max_output_buffer(buffersize)
     tb.audio_sink_3.set_max_output_buffer(buffersize)
     tb.audio_sink_4.set_max_output_buffer(buffersize)
-    tb.audio_sink_1.set_max_noutput_items(buffersize)
-    tb.audio_sink_2.set_max_noutput_items(buffersize)
-    tb.audio_sink_3.set_max_noutput_items(buffersize)
-    tb.audio_sink_4.set_max_noutput_items(buffersize)
+    tb.audio_sink_1.set_max_noutput_items(items)
+    tb.audio_sink_2.set_max_noutput_items(items)
+    tb.audio_sink_3.set_max_noutput_items(items)
+    tb.audio_sink_4.set_max_noutput_items(items)
 
     tb.set_CF(125.6e6)
     tb.set_CF(88.5e6)
-    tb.start(32)
+    tb.start(16)
 
     while True:
-        server.recv(10)
+        server.recv(33)
 
     
