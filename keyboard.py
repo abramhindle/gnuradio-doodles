@@ -136,7 +136,7 @@ class Collector(threading.Thread):
         self.send_on(note)
 
     def pitch(self, pitch):
-        self.setter.set_pscfshift(i, 2500.0*(pitch - 64)/float(127))
+        self.setter.set_pscfshift(-2500.0*(pitch - 64)/float(127))
         
         
     def find_note(self,note_code):

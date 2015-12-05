@@ -103,9 +103,9 @@ class MyOscServer(Server):
 	    tb.set_pscf4(f)
         return None
 
-    @make_method('/pscfshift', 'if')
+    @make_method('/pscfshift', 'f')
     def pscfshift_callback(self, path, args):
-        f = args
+        f = args[0]
         print "set_pscfshift %s" % (f)
 	tb.set_pscfshift(f)
         
