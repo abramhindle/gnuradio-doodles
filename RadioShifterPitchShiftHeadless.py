@@ -3,7 +3,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM radio FFT example
 # Author: David Haworth, Abram Hindle
-# Generated: Fri Dec  4 19:49:25 2015
+# Generated: Fri Dec  4 20:15:08 2015
 ##################################################
 
 from gnuradio import analog
@@ -40,6 +40,7 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         self.rri = rri = 441
         self.rrd = rrd = 500
         self.quadrature = quadrature = 500000
+        self.pscfshift = pscfshift = 0
         self.pscf4 = pscf4 = 0
         self.pscf3 = pscf3 = 0
         self.pscf2 = pscf2 = 0
@@ -114,14 +115,14 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
                 taps=None,
                 fractional_bw=None,
         )
-        self.freq_xlating_fir_filter_xxx_1_1_0_0 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf4, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1_1_0 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf3, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1_1 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf2, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1_0_0_0_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf4, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1_0_0_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf3, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1_0_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf2, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf1, samp_rate)
-        self.freq_xlating_fir_filter_xxx_1 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf1, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_1_0_0 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf4+pscfshift, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_1_0 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf3+pscfshift, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_1 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf2+pscfshift, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_0_0_0_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf4+pscfshift, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_0_0_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf3+pscfshift, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_0_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf2+pscfshift, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf1+pscfshift, samp_rate)
+        self.freq_xlating_fir_filter_xxx_1 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf1+pscfshift, samp_rate)
         self.freq_xlating_fir_filter_xxx_0_1 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_3, variable_sample_rate_0)
         self.freq_xlating_fir_filter_xxx_0_0_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_4, variable_sample_rate_0)
         self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_2, variable_sample_rate_0)
@@ -134,14 +135,14 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_vff((amp_3, ))
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((amp_2, ))
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((amp_1, ))
-        self.blocks_complex_to_mag_0_3 = blocks.complex_to_mag(1)
-        self.blocks_complex_to_mag_0_2_0_0_0 = blocks.complex_to_mag(1)
-        self.blocks_complex_to_mag_0_2_0_0 = blocks.complex_to_mag(1)
-        self.blocks_complex_to_mag_0_2_0 = blocks.complex_to_mag(1)
-        self.blocks_complex_to_mag_0_2 = blocks.complex_to_mag(1)
-        self.blocks_complex_to_mag_0_1 = blocks.complex_to_mag(1)
-        self.blocks_complex_to_mag_0_0_0 = blocks.complex_to_mag(1)
-        self.blocks_complex_to_mag_0 = blocks.complex_to_mag(1)
+        self.blocks_complex_to_float_7 = blocks.complex_to_float(1)
+        self.blocks_complex_to_float_6 = blocks.complex_to_float(1)
+        self.blocks_complex_to_float_5 = blocks.complex_to_float(1)
+        self.blocks_complex_to_float_4 = blocks.complex_to_float(1)
+        self.blocks_complex_to_float_3 = blocks.complex_to_float(1)
+        self.blocks_complex_to_float_2 = blocks.complex_to_float(1)
+        self.blocks_complex_to_float_1 = blocks.complex_to_float(1)
+        self.blocks_complex_to_float_0 = blocks.complex_to_float(1)
         self.blocks_add_xx_1_1_0 = blocks.add_vff(1)
         self.blocks_add_xx_1_1 = blocks.add_vff(1)
         self.blocks_add_xx_1_0 = blocks.add_vff(1)
@@ -154,10 +155,10 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         	1, bpsr, bplow_2, bphi_2, bptrans, firdes.WIN_HAMMING, 6.76))
         self.band_pass_filter_0_0_0_0 = filter.fir_filter_ccf(4, firdes.band_pass(
         	1, bpsr, bplow_1, bphi_1, bptrans, firdes.WIN_HAMMING, 6.76))
-        self.audio_sink_4 = audio.sink(48000, "Radio:AM2", True)
-        self.audio_sink_3 = audio.sink(48000, "Radio:NFM2", True)
-        self.audio_sink_2 = audio.sink(48000, "Radio:AM1", True)
-        self.audio_sink_1 = audio.sink(48000, "Radio:NFM1", True)
+        self.audio_sink_4 = audio.sink(44100, "Radio:AM2", True)
+        self.audio_sink_3 = audio.sink(44100, "Radio:NFM2", True)
+        self.audio_sink_2 = audio.sink(44100, "Radio:AM1", True)
+        self.audio_sink_1 = audio.sink(44100, "Radio:NFM1", True)
         self.analog_nbfm_rx_0_0_1 = analog.nbfm_rx(
         	audio_rate=50000,
         	quad_rate=int(variable_sample_rate_0/5),
@@ -215,14 +216,14 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         self.connect((self.blocks_add_xx_1_0, 0), (self.audio_sink_2, 0))    
         self.connect((self.blocks_add_xx_1_1, 0), (self.audio_sink_3, 0))    
         self.connect((self.blocks_add_xx_1_1_0, 0), (self.audio_sink_4, 0))    
-        self.connect((self.blocks_complex_to_mag_0, 0), (self.blocks_multiply_const_vxx_0_1, 0))    
-        self.connect((self.blocks_complex_to_mag_0_0_0, 0), (self.blocks_multiply_const_vxx_0_0_1_0, 0))    
-        self.connect((self.blocks_complex_to_mag_0_1, 0), (self.blocks_multiply_const_vxx_0_0_0_0, 0))    
-        self.connect((self.blocks_complex_to_mag_0_2, 0), (self.blocks_multiply_const_vxx_0, 0))    
-        self.connect((self.blocks_complex_to_mag_0_2_0, 0), (self.blocks_multiply_const_vxx_0_0, 0))    
-        self.connect((self.blocks_complex_to_mag_0_2_0_0, 0), (self.blocks_multiply_const_vxx_0_0_0, 0))    
-        self.connect((self.blocks_complex_to_mag_0_2_0_0_0, 0), (self.blocks_multiply_const_vxx_0_0_1, 0))    
-        self.connect((self.blocks_complex_to_mag_0_3, 0), (self.blocks_multiply_const_vxx_0_0_2, 0))    
+        self.connect((self.blocks_complex_to_float_0, 0), (self.blocks_multiply_const_vxx_0, 0))    
+        self.connect((self.blocks_complex_to_float_1, 0), (self.blocks_multiply_const_vxx_0_1, 0))    
+        self.connect((self.blocks_complex_to_float_2, 0), (self.blocks_multiply_const_vxx_0_0, 0))    
+        self.connect((self.blocks_complex_to_float_3, 0), (self.blocks_multiply_const_vxx_0_0_2, 0))    
+        self.connect((self.blocks_complex_to_float_4, 0), (self.blocks_multiply_const_vxx_0_0_0_0, 0))    
+        self.connect((self.blocks_complex_to_float_5, 0), (self.blocks_multiply_const_vxx_0_0_1_0, 0))    
+        self.connect((self.blocks_complex_to_float_6, 0), (self.blocks_multiply_const_vxx_0_0_1, 0))    
+        self.connect((self.blocks_complex_to_float_7, 0), (self.blocks_multiply_const_vxx_0_0_0, 0))    
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_add_xx_1, 0))    
         self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.blocks_add_xx_1, 1))    
         self.connect((self.blocks_multiply_const_vxx_0_0_0, 0), (self.blocks_add_xx_1_1, 0))    
@@ -239,14 +240,14 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         self.connect((self.freq_xlating_fir_filter_xxx_0_0_0, 0), (self.band_pass_filter_0_0_0_0_0_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_1, 0), (self.analog_nbfm_rx_0_0_1, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_1, 0), (self.band_pass_filter_0_0_0_0_1, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_1, 0), (self.blocks_complex_to_mag_0, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_1_0, 0), (self.blocks_complex_to_mag_0_2, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_1_0_0, 0), (self.blocks_complex_to_mag_0_2_0, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_1_0_0_0, 0), (self.blocks_complex_to_mag_0_2_0_0, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_1_0_0_0_0, 0), (self.blocks_complex_to_mag_0_2_0_0_0, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_1_1, 0), (self.blocks_complex_to_mag_0_3, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_1_1_0, 0), (self.blocks_complex_to_mag_0_1, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_1_1_0_0, 0), (self.blocks_complex_to_mag_0_0_0, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_1, 0), (self.blocks_complex_to_float_1, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_1_0, 0), (self.blocks_complex_to_float_0, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_1_0_0, 0), (self.blocks_complex_to_float_2, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_1_0_0_0, 0), (self.blocks_complex_to_float_7, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_1_0_0_0_0, 0), (self.blocks_complex_to_float_6, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_1_1, 0), (self.blocks_complex_to_float_3, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_1_1_0, 0), (self.blocks_complex_to_float_4, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_1_1_0_0, 0), (self.blocks_complex_to_float_5, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.freq_xlating_fir_filter_xxx_1_0_0_0, 0))    
         self.connect((self.rational_resampler_xxx_1_0, 0), (self.freq_xlating_fir_filter_xxx_1_0, 0))    
         self.connect((self.rational_resampler_xxx_1_0_0, 0), (self.freq_xlating_fir_filter_xxx_1, 0))    
@@ -346,37 +347,51 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
     def set_quadrature(self, quadrature):
         self.quadrature = quadrature
 
+    def get_pscfshift(self):
+        return self.pscfshift
+
+    def set_pscfshift(self, pscfshift):
+        self.pscfshift = pscfshift
+        self.freq_xlating_fir_filter_xxx_1.set_center_freq(self.pscf1+self.pscfshift)
+        self.freq_xlating_fir_filter_xxx_1_0.set_center_freq(self.pscf1+self.pscfshift)
+        self.freq_xlating_fir_filter_xxx_1_0_0.set_center_freq(self.pscf2+self.pscfshift)
+        self.freq_xlating_fir_filter_xxx_1_0_0_0.set_center_freq(self.pscf3+self.pscfshift)
+        self.freq_xlating_fir_filter_xxx_1_0_0_0_0.set_center_freq(self.pscf4+self.pscfshift)
+        self.freq_xlating_fir_filter_xxx_1_1.set_center_freq(self.pscf2+self.pscfshift)
+        self.freq_xlating_fir_filter_xxx_1_1_0.set_center_freq(self.pscf3+self.pscfshift)
+        self.freq_xlating_fir_filter_xxx_1_1_0_0.set_center_freq(self.pscf4+self.pscfshift)
+
     def get_pscf4(self):
         return self.pscf4
 
     def set_pscf4(self, pscf4):
         self.pscf4 = pscf4
-        self.freq_xlating_fir_filter_xxx_1_0_0_0_0.set_center_freq(self.pscf4)
-        self.freq_xlating_fir_filter_xxx_1_1_0_0.set_center_freq(self.pscf4)
+        self.freq_xlating_fir_filter_xxx_1_0_0_0_0.set_center_freq(self.pscf4+self.pscfshift)
+        self.freq_xlating_fir_filter_xxx_1_1_0_0.set_center_freq(self.pscf4+self.pscfshift)
 
     def get_pscf3(self):
         return self.pscf3
 
     def set_pscf3(self, pscf3):
         self.pscf3 = pscf3
-        self.freq_xlating_fir_filter_xxx_1_0_0_0.set_center_freq(self.pscf3)
-        self.freq_xlating_fir_filter_xxx_1_1_0.set_center_freq(self.pscf3)
+        self.freq_xlating_fir_filter_xxx_1_0_0_0.set_center_freq(self.pscf3+self.pscfshift)
+        self.freq_xlating_fir_filter_xxx_1_1_0.set_center_freq(self.pscf3+self.pscfshift)
 
     def get_pscf2(self):
         return self.pscf2
 
     def set_pscf2(self, pscf2):
         self.pscf2 = pscf2
-        self.freq_xlating_fir_filter_xxx_1_0_0.set_center_freq(self.pscf2)
-        self.freq_xlating_fir_filter_xxx_1_1.set_center_freq(self.pscf2)
+        self.freq_xlating_fir_filter_xxx_1_0_0.set_center_freq(self.pscf2+self.pscfshift)
+        self.freq_xlating_fir_filter_xxx_1_1.set_center_freq(self.pscf2+self.pscfshift)
 
     def get_pscf1(self):
         return self.pscf1
 
     def set_pscf1(self, pscf1):
         self.pscf1 = pscf1
-        self.freq_xlating_fir_filter_xxx_1.set_center_freq(self.pscf1)
-        self.freq_xlating_fir_filter_xxx_1_0.set_center_freq(self.pscf1)
+        self.freq_xlating_fir_filter_xxx_1.set_center_freq(self.pscf1+self.pscfshift)
+        self.freq_xlating_fir_filter_xxx_1_0.set_center_freq(self.pscf1+self.pscfshift)
 
     def get_cutoff(self):
         return self.cutoff

@@ -80,6 +80,9 @@ class OscSetter:
     def set_pscf(self, i, freq):
         print "set_pscf %s %s" % (i,freq)
         self.send_osc("/pscf",i+1,freq)
+    def set_pscfshift(self, freq):
+        print "set_pscfshift %s" % (freq)
+        self.send_osc("/pscfshift",freq)
 
             
 
@@ -132,6 +135,10 @@ class Collector(threading.Thread):
         self.notes.append(note)
         self.send_on(note)
 
+    def pitch(self, pitch):
+        self.setter.set_pscfshift(i, 2500.0*(pitch - 64)/float(127))
+        
+        
     def find_note(self,note_code):
         for x in self.notes:
             if x[0] == note_code:
@@ -158,9 +165,9 @@ class Collector(threading.Thread):
         if self.setter:
             r = self.maxnote - self.minnote            
             freq = self.bw * (((note_code - self.minnote)/float(r)) - 0.5)
-            pscf = 10000.0 * (((note_code - self.minnote)/float(r)) - 0.5)
-            # self.setter.set_freq(i, freq)
-            self.setter.set_freq(i, 0)
+            pscf = -10000.0 * (((note_code - self.minnote)/float(r)) - 0.5)
+            self.setter.set_freq(i, freq)
+            #self.setter.set_freq(i, 0)
             self.setter.set_pscf(i, pscf)
             self.setter.set_on(i)
             
@@ -175,6 +182,12 @@ class Collector(threading.Thread):
             self.noteon(msg[INSTR])
         elif msg[TYPE] == NOTEOFF:
             self.noteoff(msg[INSTR])
+        elif msg[TYPE] == PITCH:
+            if msg[INSTR] == 0:
+                self.pitch(msg[VELOCITY])
+            else:
+                self.mod(msg[VELOCITY])
+                
         
     def run(self):
         raise "Not working"

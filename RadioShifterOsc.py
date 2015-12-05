@@ -103,6 +103,13 @@ class MyOscServer(Server):
 	    tb.set_pscf4(f)
         return None
 
+    @make_method('/pscfshift', 'if')
+    def pscfshift_callback(self, path, args):
+        f = args
+        print "set_pscfshift %s" % (f)
+	tb.set_pscfshift(f)
+        
+
     
     @make_method(None, None)
     def fallback(self, path, args):
@@ -131,7 +138,7 @@ if __name__ == '__main__':
     tb.audio_sink_4.set_max_noutput_items(items)
 
     tb.set_CF(125.6e6)
-    tb.set_CF(88.5e6)
+    #tb.set_CF(88.5e6)
     tb.start(16)
 
     while True:
