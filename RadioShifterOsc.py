@@ -170,7 +170,7 @@ if __name__ == '__main__':
     
     tb.set_CF(125.5e6)
     #tb.set_CF(88.5e6)
-    tb.start(128)
+    tb.start(64)
 
     while True:
         server.recv(33)
