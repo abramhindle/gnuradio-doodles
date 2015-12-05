@@ -103,7 +103,7 @@ class Collector(threading.Thread):
         self.device = device
         self.quit = False
         self.notes = list()
-        self.max = 4
+        self.max = 8
         self.minnote = minnote
         self.maxnote = maxnote
         self.freqs = self.max * [False]

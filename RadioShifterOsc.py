@@ -35,6 +35,14 @@ class MyOscServer(Server):
                 tb.set_xlatecenter_3(f)
             elif i == 4:
                 tb.set_xlatecenter_4(f)
+            elif i == 5:
+                tb.set_xlatecenter_5(f)
+            elif i == 6:
+                tb.set_xlatecenter_6(f)
+            elif i == 7:
+                tb.set_xlatecenter_7(f)
+            elif i == 8:
+                tb.set_xlatecenter_8(f)
             elif i == 0:
                 tb.set_CF(f)
             else:
@@ -87,6 +95,15 @@ class MyOscServer(Server):
 	    tb.set_amp_3(f)
 	elif i == 4:
 	    tb.set_amp_4(f)
+        elif i == 5:
+            tb.set_amp_5(f)
+        elif i == 6:
+            tb.set_amp_6(f)
+        elif i == 7:
+            tb.set_amp_7(f)
+        elif i == 8:
+            tb.set_amp_8(f)
+
         return None
 
     @make_method('/pscf', 'if')
@@ -101,6 +118,15 @@ class MyOscServer(Server):
 	    tb.set_pscf3(f)
 	elif i == 4:
 	    tb.set_pscf4(f)
+        elif i == 5:
+            tb.set_pscf5(f)
+        elif i == 6:
+            tb.set_pscf6(f)
+        elif i == 7:
+            tb.set_pscf7(f)
+        elif i == 8:
+            tb.set_pscf8(f)
+
         return None
 
     @make_method('/pscfshift', 'f')
@@ -144,7 +170,7 @@ if __name__ == '__main__':
     
     tb.set_CF(125.5e6)
     #tb.set_CF(88.5e6)
-    tb.start(16)
+    tb.start(128)
 
     while True:
         server.recv(33)
