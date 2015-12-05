@@ -22,6 +22,7 @@ NOTEON = MIDION = 144
 NOTEOFF = MIDIOFF = 128
 CTRL = 176
 PITCH = 224
+MODULATE = 176
 # modulation is ctrl-176, 1
 
 class RadioShiftSetter:
@@ -83,6 +84,12 @@ class OscSetter:
     def set_pscfshift(self, freq):
         print "set_pscfshift %s" % (freq)
         self.send_osc("/pscfshift",freq)
+    def set_globaltune(self, freq):
+        print "set_globaltune %s" % (freq)
+        self.send_osc("/globaltune",freq)
+    def set_cf(self, freq):
+        print "set_freq %s %s" % (0,freq)
+        self.send_osc("/center",0,freq)
 
             
 
@@ -136,8 +143,11 @@ class Collector(threading.Thread):
         self.send_on(note)
 
     def pitch(self, pitch):
-        self.setter.set_pscfshift(-2500.0*(pitch - 64)/float(127))
-        
+        self.setter.set_pscfshift(2500.0*(pitch - 64)/float(127))
+
+    def mod(self, pitch):
+        self.setter.set_globaltune(40000.0*(pitch - 64)/float(127))
+
         
     def find_note(self,note_code):
         for x in self.notes:
@@ -175,6 +185,9 @@ class Collector(threading.Thread):
         (note_code, i) = note        
         self.setter.set_off(i)
 
+    def ctrl1(self,note):
+        self.setter.set_cf( 24e6 + 1e6*note )
+        
     def handle_message(self, msg):
         msg = msg[0]
         print msg
@@ -183,10 +196,12 @@ class Collector(threading.Thread):
         elif msg[TYPE] == NOTEOFF:
             self.noteoff(msg[INSTR])
         elif msg[TYPE] == PITCH:
-            if msg[INSTR] == 0:
-                self.pitch(msg[VELOCITY])
-            else:
+            self.pitch(msg[VELOCITY])
+        elif msg[TYPE] == CTRL:
+            if msg[INSTR] == 1:
                 self.mod(msg[VELOCITY])
+            elif msg[INSTR] == 74:
+                self.ctrl1(msg[VELOCITY])
                 
         
     def run(self):

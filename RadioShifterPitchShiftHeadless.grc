@@ -571,6 +571,33 @@
     </param>
     <param>
       <key>_coordinate</key>
+      <value>(712, 235)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>globaltune</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
       <value>(1416, 59)</value>
     </param>
     <param>
@@ -4140,7 +4167,7 @@
     </param>
     <param>
       <key>center_freq</key>
-      <value>xlatecenter</value>
+      <value>xlatecenter+globaltune</value>
     </param>
     <param>
       <key>comment</key>
@@ -4199,7 +4226,7 @@
     </param>
     <param>
       <key>center_freq</key>
-      <value>xlatecenter_2</value>
+      <value>xlatecenter_2+globaltune</value>
     </param>
     <param>
       <key>comment</key>
@@ -4258,7 +4285,7 @@
     </param>
     <param>
       <key>center_freq</key>
-      <value>xlatecenter_4</value>
+      <value>xlatecenter_4+globaltune</value>
     </param>
     <param>
       <key>comment</key>
@@ -4317,7 +4344,7 @@
     </param>
     <param>
       <key>center_freq</key>
-      <value>xlatecenter_3</value>
+      <value>xlatecenter_3+globaltune</value>
     </param>
     <param>
       <key>comment</key>

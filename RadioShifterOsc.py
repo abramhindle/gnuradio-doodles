@@ -108,6 +108,11 @@ class MyOscServer(Server):
         f = args[0]
         print "set_pscfshift %s" % (f)
 	tb.set_pscfshift(f)
+    @make_method('/globaltune', 'f')
+    def globaltune_callback(self, path, args):
+        f = args[0]
+        print "set_globaltune %s" % (f)
+	tb.set_globaltune(f)
         
 
     
@@ -136,8 +141,8 @@ if __name__ == '__main__':
     tb.audio_sink_2.set_max_noutput_items(items)
     tb.audio_sink_3.set_max_noutput_items(items)
     tb.audio_sink_4.set_max_noutput_items(items)
-
-    tb.set_CF(125.6e6)
+    
+    tb.set_CF(125.5e6)
     #tb.set_CF(88.5e6)
     tb.start(16)
 

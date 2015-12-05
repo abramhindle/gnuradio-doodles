@@ -3,7 +3,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM radio FFT example
 # Author: David Haworth, Abram Hindle
-# Generated: Fri Dec  4 20:15:08 2015
+# Generated: Fri Dec  4 20:30:08 2015
 ##################################################
 
 from gnuradio import analog
@@ -45,6 +45,7 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         self.pscf3 = pscf3 = 0
         self.pscf2 = pscf2 = 0
         self.pscf1 = pscf1 = 0
+        self.globaltune = globaltune = 0
         self.cutoff = cutoff = 1e5
         self.bptrans = bptrans = 100
         self.bpsr = bpsr = 200000
@@ -123,10 +124,10 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         self.freq_xlating_fir_filter_xxx_1_0_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf2+pscfshift, samp_rate)
         self.freq_xlating_fir_filter_xxx_1_0 = filter.freq_xlating_fir_filter_fcc(1, (1, ), pscf1+pscfshift, samp_rate)
         self.freq_xlating_fir_filter_xxx_1 = filter.freq_xlating_fir_filter_ccc(1, (1, ), pscf1+pscfshift, samp_rate)
-        self.freq_xlating_fir_filter_xxx_0_1 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_3, variable_sample_rate_0)
-        self.freq_xlating_fir_filter_xxx_0_0_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_4, variable_sample_rate_0)
-        self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_2, variable_sample_rate_0)
-        self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter, variable_sample_rate_0)
+        self.freq_xlating_fir_filter_xxx_0_1 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_3+globaltune, variable_sample_rate_0)
+        self.freq_xlating_fir_filter_xxx_0_0_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_4+globaltune, variable_sample_rate_0)
+        self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_2+globaltune, variable_sample_rate_0)
+        self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter+globaltune, variable_sample_rate_0)
         self.blocks_multiply_const_vxx_0_1 = blocks.multiply_const_vff((amp_1, ))
         self.blocks_multiply_const_vxx_0_0_2 = blocks.multiply_const_vff((amp_2, ))
         self.blocks_multiply_const_vxx_0_0_1_0 = blocks.multiply_const_vff((amp_4, ))
@@ -278,28 +279,28 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
 
     def set_xlatecenter_4(self, xlatecenter_4):
         self.xlatecenter_4 = xlatecenter_4
-        self.freq_xlating_fir_filter_xxx_0_0_0.set_center_freq(self.xlatecenter_4)
+        self.freq_xlating_fir_filter_xxx_0_0_0.set_center_freq(self.xlatecenter_4+self.globaltune)
 
     def get_xlatecenter_3(self):
         return self.xlatecenter_3
 
     def set_xlatecenter_3(self, xlatecenter_3):
         self.xlatecenter_3 = xlatecenter_3
-        self.freq_xlating_fir_filter_xxx_0_1.set_center_freq(self.xlatecenter_3)
+        self.freq_xlating_fir_filter_xxx_0_1.set_center_freq(self.xlatecenter_3+self.globaltune)
 
     def get_xlatecenter_2(self):
         return self.xlatecenter_2
 
     def set_xlatecenter_2(self, xlatecenter_2):
         self.xlatecenter_2 = xlatecenter_2
-        self.freq_xlating_fir_filter_xxx_0_0.set_center_freq(self.xlatecenter_2)
+        self.freq_xlating_fir_filter_xxx_0_0.set_center_freq(self.xlatecenter_2+self.globaltune)
 
     def get_xlatecenter(self):
         return self.xlatecenter
 
     def set_xlatecenter(self, xlatecenter):
         self.xlatecenter = xlatecenter
-        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.xlatecenter)
+        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.xlatecenter+self.globaltune)
 
     def get_xlate_filter2(self):
         return self.xlate_filter2
@@ -392,6 +393,16 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         self.pscf1 = pscf1
         self.freq_xlating_fir_filter_xxx_1.set_center_freq(self.pscf1+self.pscfshift)
         self.freq_xlating_fir_filter_xxx_1_0.set_center_freq(self.pscf1+self.pscfshift)
+
+    def get_globaltune(self):
+        return self.globaltune
+
+    def set_globaltune(self, globaltune):
+        self.globaltune = globaltune
+        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.xlatecenter+self.globaltune)
+        self.freq_xlating_fir_filter_xxx_0_0.set_center_freq(self.xlatecenter_2+self.globaltune)
+        self.freq_xlating_fir_filter_xxx_0_0_0.set_center_freq(self.xlatecenter_4+self.globaltune)
+        self.freq_xlating_fir_filter_xxx_0_1.set_center_freq(self.xlatecenter_3+self.globaltune)
 
     def get_cutoff(self):
         return self.cutoff
