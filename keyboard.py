@@ -212,7 +212,8 @@ def liblomain():
     midiin = rtmidi.MidiIn()
     available_ports = midiin.get_ports()
     devname = u'BEHRINGER UMC404 28:0'
-    devname = u'masterkey 49 32:0'
+    devname = u'masterkey 49 28:0'
+    #devname = u'seq24 130:0'
     devindex = available_ports.index(devname)
     minnote = 36
     maxnote = 84
@@ -233,7 +234,8 @@ if __name__ == '__main__':
     midiin = rtmidi.MidiIn()
     available_ports = midiin.get_ports()
     devname = u'BEHRINGER UMC404 28:0'
-    devname = u'masterkey 49 32:0'
+    devname = u'masterkey 49 28:0'
+    #devname = u'seq24 130:0'
     devindex = available_ports.index(devname)
     minnote = 36
     maxnote = 84

@@ -3,8 +3,18 @@
 # GNU Radio Python Flow Graph
 # Title: FM radio FFT example
 # Author: David Haworth, Abram Hindle
-# Generated: Wed Jan 20 23:20:17 2016
+# Generated: Wed Jan 20 23:20:11 2016
 ##################################################
+
+if __name__ == '__main__':
+    import ctypes
+    import sys
+    if sys.platform.startswith('linux'):
+        try:
+            x11 = ctypes.cdll.LoadLibrary('libX11.so')
+            x11.XInitThreads()
+        except:
+            print "Warning: failed to XInitThreads()"
 
 from gnuradio import analog
 from gnuradio import audio
@@ -12,17 +22,24 @@ from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import filter
 from gnuradio import gr
+from gnuradio import wxgui
 from gnuradio.eng_option import eng_option
+from gnuradio.fft import window
 from gnuradio.filter import firdes
+from gnuradio.wxgui import waterfallsink2
+from grc_gnuradio import wxgui as grc_wxgui
 from optparse import OptionParser
 import osmosdr
 import time
+import wx
 
 
-class RadioShifterPitchShiftHeadless(gr.top_block):
+class RadioShifterPitchShiftHeadful(grc_wxgui.top_block_gui):
 
     def __init__(self):
-        gr.top_block.__init__(self, "FM radio FFT example")
+        grc_wxgui.top_block_gui.__init__(self, title="FM radio FFT example")
+        _icon_path = "/usr/share/icons/hicolor/32x32/apps/gnuradio-grc.png"
+        self.SetIcon(wx.Icon(_icon_path, wx.BITMAP_TYPE_ANY))
 
         ##################################################
         # Variables
@@ -80,6 +97,21 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
+        self.wxgui_waterfallsink2_0 = waterfallsink2.waterfall_sink_c(
+        	self.GetWin(),
+        	baseband_freq=CF,
+        	dynamic_range=100,
+        	ref_level=0,
+        	ref_scale=2.0,
+        	sample_rate=variable_sample_rate_0,
+        	fft_size=512,
+        	fft_rate=15,
+        	average=False,
+        	avg_alpha=None,
+        	title="Waterfall Plot",
+        	size=(924,668),
+        )
+        self.Add(self.wxgui_waterfallsink2_0.win)
         self.rational_resampler_xxx_1_0_1_0_0_2 = filter.rational_resampler_fff(
                 interpolation=rri,
                 decimation=rrd,
@@ -331,6 +363,7 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         self.connect((self.RTL820T, 0), (self.freq_xlating_fir_filter_xxx_0_0_0_0_1, 0))    
         self.connect((self.RTL820T, 0), (self.freq_xlating_fir_filter_xxx_0_0_0_0_2, 0))    
         self.connect((self.RTL820T, 0), (self.freq_xlating_fir_filter_xxx_0_1, 0))    
+        self.connect((self.RTL820T, 0), (self.wxgui_waterfallsink2_0, 0))    
         self.connect((self.analog_nbfm_rx_0_0, 0), (self.rational_resampler_xxx_1_0, 0))    
         self.connect((self.analog_nbfm_rx_0_0_0, 0), (self.rational_resampler_xxx_1_0_1, 0))    
         self.connect((self.analog_nbfm_rx_0_0_0_0, 0), (self.rational_resampler_xxx_1_0_1_0, 0))    
@@ -442,6 +475,7 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
         self.variable_sample_rate_0 = variable_sample_rate_0
         self.set_xlate_filter(firdes.low_pass(1, self.variable_sample_rate_0, 125000, 25000, firdes.WIN_HAMMING, 6.76))
         self.RTL820T.set_sample_rate(self.variable_sample_rate_0)
+        self.wxgui_waterfallsink2_0.set_sample_rate(self.variable_sample_rate_0)
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -837,16 +871,12 @@ class RadioShifterPitchShiftHeadless(gr.top_block):
     def set_CF(self, CF):
         self.CF = CF
         self.RTL820T.set_center_freq(self.CF, 0)
+        self.wxgui_waterfallsink2_0.set_baseband_freq(self.CF)
 
 
 if __name__ == '__main__':
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     (options, args) = parser.parse_args()
-    tb = RadioShifterPitchShiftHeadless()
-    tb.start()
-    try:
-        raw_input('Press Enter to quit: ')
-    except EOFError:
-        pass
-    tb.stop()
-    tb.wait()
+    tb = RadioShifterPitchShiftHeadful()
+    tb.Start(True)
+    tb.Wait()

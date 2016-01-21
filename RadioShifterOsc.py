@@ -10,8 +10,10 @@ if __name__ == '__main__':
 
 from optparse import OptionParser
 from gnuradio.eng_option import eng_option
-import RadioShifterPitchShiftHeadless
+import RadioShifterPitchShiftHeadful
 from liblo import *
+import threading
+
 tb = None
 class MyOscServer(Server):
     def __init__(self):
@@ -150,7 +152,7 @@ import time
 if __name__ == '__main__':
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     (options, args) = parser.parse_args()
-    tb = RadioShifterPitchShiftHeadless.RadioShifterPitchShiftHeadless()
+    tb = RadioShifterPitchShiftHeadful.RadioShifterPitchShiftHeadful()
     try:
         server = MyOscServer()
     except ServerError, err:
@@ -170,9 +172,17 @@ if __name__ == '__main__':
     
     tb.set_CF(125.5e6)
     #tb.set_CF(88.5e6)
-    tb.start(64)
-
-    while True:
-        server.recv(33)
+    #tb.start(64)
+    #tb.start(64)
+    #tb.Start(True)
+    def worker():
+        while True:
+            server.recv(33)
+    #while True:
+    #    server.recv(33)
+    t = threading.Thread(target=worker)
+    t.start()
+    tb.Start(True)
+    tb.Wait()
 
     
