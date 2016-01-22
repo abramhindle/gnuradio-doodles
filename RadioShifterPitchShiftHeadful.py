@@ -3,7 +3,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM radio FFT example
 # Author: David Haworth, Abram Hindle
-# Generated: Wed Jan 20 23:20:11 2016
+# Generated: Thu Jan 21 18:58:21 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -83,6 +83,8 @@ class RadioShifterPitchShiftHeadful(grc_wxgui.top_block_gui):
         self.bphi_2 = bphi_2 = 2.8e3
         self.bphi_1 = bphi_1 = 2.8e3
         self.audio_interp = audio_interp = 4
+        self.amp_fm = amp_fm = 1
+        self.amp_am = amp_am = 1
         self.amp_8 = amp_8 = 0
         self.amp_7 = amp_7 = 0
         self.amp_6 = amp_6 = 0
@@ -232,6 +234,10 @@ class RadioShifterPitchShiftHeadful(grc_wxgui.top_block_gui):
         self.freq_xlating_fir_filter_xxx_0_0_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_4+globaltune, variable_sample_rate_0)
         self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter_2+globaltune, variable_sample_rate_0)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(5, (xlate_filter), xlatecenter+globaltune, variable_sample_rate_0)
+        self.blocks_multiply_const_vxx_0_1_0_1_0 = blocks.multiply_const_vff((amp_am, ))
+        self.blocks_multiply_const_vxx_0_1_0_1 = blocks.multiply_const_vff((amp_am, ))
+        self.blocks_multiply_const_vxx_0_1_0_0 = blocks.multiply_const_vff((amp_fm, ))
+        self.blocks_multiply_const_vxx_0_1_0 = blocks.multiply_const_vff((amp_fm, ))
         self.blocks_multiply_const_vxx_0_1 = blocks.multiply_const_vff((amp_1, ))
         self.blocks_multiply_const_vxx_0_0_2 = blocks.multiply_const_vff((amp_2, ))
         self.blocks_multiply_const_vxx_0_0_1_1_2 = blocks.multiply_const_vff((amp_8, ))
@@ -380,10 +386,10 @@ class RadioShifterPitchShiftHeadful(grc_wxgui.top_block_gui):
         self.connect((self.band_pass_filter_0_0_0_0_0_0_0_1, 0), (self.rational_resampler_xxx_1_0_0_0_0_0_1, 0))    
         self.connect((self.band_pass_filter_0_0_0_0_0_0_0_2, 0), (self.rational_resampler_xxx_1_0_0_0_0_0_2, 0))    
         self.connect((self.band_pass_filter_0_0_0_0_1, 0), (self.rational_resampler_xxx_1_0_0_1, 0))    
-        self.connect((self.blocks_add_xx_1, 0), (self.audio_sink_1, 0))    
-        self.connect((self.blocks_add_xx_1_0, 0), (self.audio_sink_2, 0))    
-        self.connect((self.blocks_add_xx_1_1, 0), (self.audio_sink_3, 0))    
-        self.connect((self.blocks_add_xx_1_1_0, 0), (self.audio_sink_4, 0))    
+        self.connect((self.blocks_add_xx_1, 0), (self.blocks_multiply_const_vxx_0_1_0, 0))    
+        self.connect((self.blocks_add_xx_1_0, 0), (self.blocks_multiply_const_vxx_0_1_0_1, 0))    
+        self.connect((self.blocks_add_xx_1_1, 0), (self.blocks_multiply_const_vxx_0_1_0_0, 0))    
+        self.connect((self.blocks_add_xx_1_1_0, 0), (self.blocks_multiply_const_vxx_0_1_0_1_0, 0))    
         self.connect((self.blocks_add_xx_1_1_0_0, 0), (self.blocks_add_xx_1_1, 2))    
         self.connect((self.blocks_add_xx_1_1_0_0_0, 0), (self.blocks_add_xx_1_1_0, 2))    
         self.connect((self.blocks_complex_to_float_0, 0), (self.blocks_multiply_const_vxx_0, 0))    
@@ -418,6 +424,10 @@ class RadioShifterPitchShiftHeadful(grc_wxgui.top_block_gui):
         self.connect((self.blocks_multiply_const_vxx_0_0_1_1_2, 0), (self.blocks_add_xx_1_1_0_0, 3))    
         self.connect((self.blocks_multiply_const_vxx_0_0_2, 0), (self.blocks_add_xx_1_0, 1))    
         self.connect((self.blocks_multiply_const_vxx_0_1, 0), (self.blocks_add_xx_1_0, 0))    
+        self.connect((self.blocks_multiply_const_vxx_0_1_0, 0), (self.audio_sink_1, 0))    
+        self.connect((self.blocks_multiply_const_vxx_0_1_0_0, 0), (self.audio_sink_3, 0))    
+        self.connect((self.blocks_multiply_const_vxx_0_1_0_1, 0), (self.audio_sink_2, 0))    
+        self.connect((self.blocks_multiply_const_vxx_0_1_0_1_0, 0), (self.audio_sink_4, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.analog_nbfm_rx_0_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.band_pass_filter_0_0_0_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.analog_nbfm_rx_0_0_0, 0))    
@@ -793,6 +803,22 @@ class RadioShifterPitchShiftHeadful(grc_wxgui.top_block_gui):
 
     def set_audio_interp(self, audio_interp):
         self.audio_interp = audio_interp
+
+    def get_amp_fm(self):
+        return self.amp_fm
+
+    def set_amp_fm(self, amp_fm):
+        self.amp_fm = amp_fm
+        self.blocks_multiply_const_vxx_0_1_0.set_k((self.amp_fm, ))
+        self.blocks_multiply_const_vxx_0_1_0_0.set_k((self.amp_fm, ))
+
+    def get_amp_am(self):
+        return self.amp_am
+
+    def set_amp_am(self, amp_am):
+        self.amp_am = amp_am
+        self.blocks_multiply_const_vxx_0_1_0_1.set_k((self.amp_am, ))
+        self.blocks_multiply_const_vxx_0_1_0_1_0.set_k((self.amp_am, ))
 
     def get_amp_8(self):
         return self.amp_8

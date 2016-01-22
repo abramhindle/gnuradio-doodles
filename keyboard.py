@@ -90,6 +90,12 @@ class OscSetter:
     def set_cf(self, freq):
         print "set_freq %s %s" % (0,freq)
         self.send_osc("/center",0,freq)
+    def set_fm(self, amp):
+        print "set_fm %s" % (amp)
+        self.send_osc("/fm",amp)
+    def set_am(self, amp):
+        print "set_am %s" % (amp)
+        self.send_osc("/am",amp)
 
             
 
@@ -185,9 +191,15 @@ class Collector(threading.Thread):
         (note_code, i) = note        
         self.setter.set_off(i)
 
+    def ctrl2(self,note):
+        return None
     def ctrl1(self,note):
         self.setter.set_cf( 24e6 + 1e6*note )
-        
+    def ctrl3(self,note):
+        self.setter.set_am( note / float(127) )
+    def ctrl4(self,note):
+        self.setter.set_fm( note / float(127) )
+
     def handle_message(self, msg):
         msg = msg[0]
         print msg
@@ -202,6 +214,12 @@ class Collector(threading.Thread):
                 self.mod(msg[VELOCITY])
             elif msg[INSTR] == 74:
                 self.ctrl1(msg[VELOCITY])
+            elif msg[INSTR] == 73:
+                self.ctrl3(msg[VELOCITY])
+            elif msg[INSTR] == 72:
+                self.ctrl4(msg[VELOCITY])
+            elif msg[INSTR] == 71:
+                self.ctrl2(msg[VELOCITY])
                 
         
     def run(self):

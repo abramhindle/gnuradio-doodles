@@ -128,7 +128,6 @@ class MyOscServer(Server):
             tb.set_pscf7(f)
         elif i == 8:
             tb.set_pscf8(f)
-
         return None
 
     @make_method('/pscfshift', 'f')
@@ -142,6 +141,17 @@ class MyOscServer(Server):
         print "set_globaltune %s" % (f)
 	tb.set_globaltune(f)
         
+    @make_method('/fm', 'f')
+    def fm_callback(self, path, args):
+        f = args[0]
+        print "set_fm %s" % (f)
+	tb.set_amp_fm(f)
+
+    @make_method('/am', 'f')
+    def am_callback(self, path, args):
+        f = args[0]
+        print "set_am %s" % (f)
+	tb.set_amp_am(f)
 
     
     @make_method(None, None)
@@ -158,8 +168,8 @@ if __name__ == '__main__':
     except ServerError, err:
         print str(err)
         sys.exit()
-    buffersize = 1024
-    items = 256
+    buffersize = 4096
+    items = 1024
     tb.set_max_noutput_items(items)
     tb.audio_sink_1.set_max_output_buffer(buffersize)
     tb.audio_sink_2.set_max_output_buffer(buffersize)
